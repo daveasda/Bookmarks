@@ -9,7 +9,7 @@ function Home() {
             <Navbar />
 
             <section className="hero"> 
-                <img src="/books.webp" className="hero-image"/>
+                <img src="/books.jpg" className="hero-image"/>
             </section>
             
         </div>
