@@ -4,7 +4,10 @@ import BookCard from "./BookCard.jsx";
 function BookSection({ title, books }) {
   return (
     <section className="book-section">
-      <h2>{title}</h2>
+      <div className="book-section-heading">
+        <h2 className="book-section-title">{title}</h2>
+        <div className="section-divider"></div>
+      </div>
 
       <div className="book-grid">
         {books.map((book) => (

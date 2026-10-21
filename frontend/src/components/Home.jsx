@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import Navbar from './Navbar.jsx';
 import BookSection from './BookSection.jsx';
+import Footer from './Footer.jsx';
 
 function Home() {
 
@@ -50,17 +51,18 @@ function Home() {
 
 
     return(
-        <div className="bg-teal-light" >
+        <div >
             <Navbar />
 
             <section className="hero"> 
-                <img src="/books.jpg" className="hero-image"/>
+                <img src="/books.webp" className="hero-image"/>
             </section>
 
             <BookSection title="Bestsellers" books={books} />
 
             <BookSection title="Popular" books={books} />
             
+            <Footer />
         </div>
 
     );

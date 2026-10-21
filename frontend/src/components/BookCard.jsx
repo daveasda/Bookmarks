@@ -8,10 +8,18 @@ function BookCard({book}) {
 
     return (
         <Link to={`/book/${book.id}`} className="book-card">
-            <img src={coverUrl} className="book-card-image" loading="lazy" onError = {(e) => { e.currentTarget.onerror=null; e.currentTarget.src="/images/no-cover.jpg";}} />
-            <h3> {book.title}</h3>
-            <p> {book.author}</p>
-            <p className="book-price">Rs. {book.price}</p>
+            <div className="book-card-cover">
+                <img src={coverUrl} className="book-card-image" loading="lazy" onError = {(e) => { e.currentTarget.onerror=null; e.currentTarget.src="/images/no-cover.jpg";}} />
+                {book.stock === 0 && (<span className="book-badge"> OUT OF STOCK </span>)}
+            </div>
+
+            <div className="book-card-content">
+                <span className="book-category">{book.genre}</span>
+                <h3> {book.title}</h3>
+                <p> {book.author}</p>
+                <p className="book-price">Rs. {book.price.toLocaleString()}</p>
+            </div>
+           
         </Link>
     );
 
