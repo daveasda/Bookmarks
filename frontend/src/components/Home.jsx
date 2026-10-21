@@ -12,6 +12,7 @@ function Home() {
         title: "Atomic Habits",
         author: "James Clear",
         isbn: "9780735211292",
+        image: "/atomic-habits.jfif",
         price: 3500,
         genre: "Self Help"
         },
@@ -20,6 +21,7 @@ function Home() {
         title: "The Alchemist",
         author: "Paulo Coelho",
         isbn: "9780061122415",
+        image: "/the-alchemist.jfif",
         price: 2800,
         genre: "Fiction"
         },
@@ -28,6 +30,7 @@ function Home() {
         title: "1984",
         author: "George Orwell",
         isbn: "9780451524935",
+        image: "/1984.jfif",
         price: 2500,
         genre: "Dystopian"
         },
@@ -36,6 +39,7 @@ function Home() {
         title: "The Hobbit",
         author: "J.R.R. Tolkien",
         isbn: "9780547928227",
+        image: "/the-hobbit.jfif",
         price: 3200,
         genre: "Fantasy"
         },
@@ -44,6 +48,7 @@ function Home() {
         title: "Harry Potter and the Sorcerer's Stone",
         author: "J.K. Rowling",
         isbn: "9780590353427",
+        image: "/harry-potter.jfif",
         price: 3800,
         genre: "Fantasy"
         }

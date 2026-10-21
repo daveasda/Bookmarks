@@ -32,7 +32,7 @@ const Navbar = () => {
         </Link>
 
         <div className={`nav-links ${isOpen ? "open" : ""}`}>
-          <Link to="/shop" onClick={() => setIsOpen(false)}>
+          <Link to="/books" onClick={() => setIsOpen(false)}>
             Shop
           </Link>
 
