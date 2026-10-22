@@ -65,7 +65,7 @@ const Navbar = () => {
             <ShoppingCart size={27} />
           </Link>
 
-          <Link to="/myprofile" className="profile-link">
+          <Link to="/account" className="profile-link">
             <UserRound size={29} />
             <span>Sign In</span>
           </Link>
