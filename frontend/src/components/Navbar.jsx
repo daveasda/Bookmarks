@@ -1,6 +1,6 @@
 
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, NavLink } from "react-router-dom";
 import { Search, ShoppingCart, UserRound, Menu, X } from "lucide-react";
 
 const Navbar = () => {
@@ -13,7 +13,7 @@ const Navbar = () => {
     e.preventDefault();
 
     if (searchTerm.trim()) {
-      navigate(`/shop?search=${encodeURIComponent(searchTerm.trim())}`);
+      navigate(`/books?search=${encodeURIComponent(searchTerm.trim())}`);
       setIsOpen(false);
     }
   };
@@ -32,13 +32,13 @@ const Navbar = () => {
         </Link>
 
         <div className={`nav-links ${isOpen ? "open" : ""}`}>
-          <Link to="/books" onClick={() => setIsOpen(false)}>
+          <NavLink to="/books" onClick={() => setIsOpen(false)}>
             Shop
-          </Link>
+          </NavLink>
 
-          <Link to="/about" onClick={() => setIsOpen(false)}>
+          <NavLink to="/about" onClick={() => setIsOpen(false)}>
             About Us
-          </Link>
+          </NavLink>
         </div>
 
         <form className="nav-search-form" onSubmit={handleSearchSubmit}>
