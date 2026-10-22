@@ -260,6 +260,12 @@ select {
   white-space: nowrap;
 }
 
+.nav-links a.active {
+  color: var(--primary);
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 5px;
+}
+
 .nav-links a:hover {
   color: var(--primary);
 }
@@ -710,3 +716,291 @@ select {
     font-size: var(--font-size-3xl);
   }
 }
+
+
+/* =========================================
+   ABOUT US PAGE
+========================================= */
+
+.about-page {
+  background-color: var(--page-background);
+  color: var(--text-light);
+}
+
+/* INTRODUCTION */
+
+.about-hero {
+  padding: 95px 5% 100px;
+  text-align: center;
+}
+
+.about-eyebrow {
+  font-family: var(--font-body);
+  font-size: var(--font-size-2xs);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--highlight);
+  margin: 0 0 20px;
+}
+
+.about-hero h1 {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.2;
+  margin: 0 0 25px;
+}
+
+.about-hero-text {
+  max-width: 650px;
+  margin: 0 auto;
+  font-size: var(--font-size-md);
+  line-height: 1.8;
+  color: var(--accent);
+}
+
+/* =========================================
+   ABOUT US - OUR STORY
+========================================= */
+
+.about-story {
+  display: grid;
+  grid-template-columns: 380px 520px;
+  justify-content: center;
+  align-items: center;
+  gap: 65px;
+
+  padding: 70px 5%;
+  background-color: var(--panel);
+  color: var(--text-primary);
+}
+
+/* Image container */
+
+.about-story-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+
+/* Illustration */
+
+.about-story-image img {
+  display: block;
+  width: 100%;
+  max-width: 360px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Text container */
+
+.about-story-content {
+  min-width: 0;
+  max-width: 520px;
+}
+
+/* Small label */
+
+.about-story-content .about-eyebrow {
+  color: var(--secondary);
+  margin-bottom: 15px;
+}
+
+/* Heading */
+
+.about-story-content h2 {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-regular);
+  color: var(--primary);
+  margin: 0 0 18px;
+}
+
+/* Decorative line */
+
+.about-small-divider {
+  width: 65px;
+  height: 2px;
+  background-color: var(--accent);
+  margin-bottom: 25px;
+}
+
+/* Paragraphs */
+
+.about-story-content p:not(.about-eyebrow) {
+  font-family: var(--font-body);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.9;
+  color: var(--text-secondary);
+  margin: 0 0 18px;
+}
+
+/* OUR PHILOSOPHY */
+
+.about-philosophy {
+  padding: 100px 8%;
+  text-align: center;
+}
+
+.about-philosophy h2 {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-regular);
+  margin: 0 0 25px;
+}
+
+.about-philosophy > p:not(.about-eyebrow) {
+  max-width: 650px;
+  margin: 0 auto 60px;
+  font-size: var(--font-size-base);
+  line-height: 1.9;
+  color: var(--accent);
+}
+
+/* THREE FEATURE COLUMNS */
+
+.about-features {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 30px;
+}
+
+.about-feature {
+  padding: 35px 25px;
+  border: 1px solid var(--accent);
+  text-align: center;
+}
+
+.about-feature-number {
+  display: block;
+  font-size: var(--font-size-compact);
+  color: var(--highlight);
+  margin-bottom: 20px;
+}
+
+.about-feature h3 {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-regular);
+  margin: 0 0 15px;
+}
+
+.about-feature p {
+  font-size: var(--font-size-compact);
+  line-height: 1.8;
+  color: var(--accent);
+  margin: 0;
+}
+
+/* CALL TO ACTION */
+
+.about-cta {
+  padding: 90px 5%;
+  background-color: var(--panel);
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.about-cta h2 {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-regular);
+  color: var(--primary);
+  margin: 0 0 20px;
+}
+
+.about-cta p {
+  font-size: var(--font-size-base);
+  line-height: 1.8;
+  color: var(--text-secondary);
+  margin: 0 0 35px;
+}
+
+.about-shop-btn {
+  display: inline-block;
+  padding: 15px 35px;
+  background-color: var(--primary);
+  color: var(--text-light);
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-regular);
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.about-shop-btn:hover {
+  background-color: var(--primary-hover);
+}
+
+
+/* RESPONSIVE ABOUT PAGE */
+
+/* Tablets */
+
+@media (max-width: 1050px) {
+  .about-story {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 35px;
+    padding: 60px 5%;
+  }
+
+  .about-story-image img {
+    max-width: 320px;
+    height: auto;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 700px) {
+  .about-hero {
+    padding: 65px 5%;
+  }
+
+  .about-hero h1 {
+    font-size: var(--font-size-3xl);
+  }
+
+  .about-story {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding: 50px 6%;
+  }
+
+  .about-story-image img {
+    max-width: 280px;
+    height: auto;
+  }
+
+  .about-story-content {
+    max-width: 100%;
+  }
+
+  .about-story-content h2 {
+    font-size: var(--font-size-2xl);
+  }
+
+  .about-philosophy {
+    padding: 65px 5%;
+  }
+
+  .about-features {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .about-cta {
+    padding: 65px 5%;
+  }
+
+  .about-cta h2,
+  .about-philosophy h2 {
+    font-size: var(--font-size-2xl);
+  }
+}
+

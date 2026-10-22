@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Home from './Home.jsx'
 import Shop from './Shop.jsx'
+import About from './About.jsx'
 // import Login from './Login.jsx'
 // import Register from './Register.jsx'
 // import Dashboard from './Dashboard.jsx'
@@ -16,6 +17,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/books" element={<Shop />} />
+        <Route path="/about" element={<About />} />
         {/* <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard/:userId" element={<Dashboard />} />

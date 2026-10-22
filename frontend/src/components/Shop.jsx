@@ -1,4 +1,7 @@
 import React from "react";
+import Navbar from "./Navbar.jsx";
+import BookSection from "./BookSection.jsx";
+import Footer from "./Footer.jsx";
 
 function Shop() {
 
@@ -51,7 +54,24 @@ function Shop() {
     ];
 
   return (
-    <div> Hello, Shop!</div>
+    <div> 
+        <Navbar />
+
+        <section className="hero"> 
+                <img src="/shop.webp" className="hero-image"/>
+        </section>
+
+        <BookSection title="Fiction" books={books} />
+
+        <BookSection title="Non-Fiction" books={books} />
+
+        <BookSection title="Fantasy" books={books} />
+
+        <BookSection title="Horror" books={books} />
+
+        <Footer />
+    
+    </div>
     );  
 }
 
