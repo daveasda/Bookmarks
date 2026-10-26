@@ -12,6 +12,7 @@ function Account() {
   });
 
   const [register, setRegister] = useState({
+    full_name:"",
     email: "",
     password: "",
   });
@@ -41,10 +42,28 @@ function Account() {
   };
 
   // Frontend-only registration
-  const handleRegister = (event) => {
+  const handleRegister = async (event) => {
     event.preventDefault();
-    navigate("/my-profile");
+    try {
+      const response = await fetch("http://localhost:5000/api/auth/register",
+
+        {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify(register)
+        }
+      );
+      const data = await response.json();
+      
+      if (!response.ok) { alert(data.message); return;}
+      console.log("Registration successful! Please log in. ")
+      setRegister({ full_name:"", email:"", password:""});
+    }
+    catch (error) {
+      console.error("Registration error:", error);
+    }
   };
+
 
   return (
     <>
@@ -116,6 +135,21 @@ function Account() {
                 className="account-form"
                 onSubmit={handleRegister}
               >
+                <div className="account-field">
+                  <label htmlFor="register-name">
+                    Full Name *
+                  </label>
+                  <input id="register-name" 
+                         type="text" 
+                         name="full_name" 
+                         value={register.full_name} 
+                         onChange={handleRegisterChange} 
+                         placeholder="Enter your full name" 
+                         autoComplete="name"
+                         maxLength= {150}
+                         required />
+                    
+                </div>
                 <div className="account-field">
                   <label htmlFor="register-email">
                     Email address *
