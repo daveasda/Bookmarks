@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
+import pool from "./config/db.js";
 
 dotenv.config();
 
@@ -25,6 +26,20 @@ app.use(cookieParser());
 // Test route
 app.get("/", (req, res) => {
   res.json({ message: "BookMarks backend is running!" });
+});
+
+app.get("/api/test-db", async (req, res) => {
+  try{
+    const result = await pool.query("SELECT NOW() AS current_time");
+
+    res.json({ 
+      message: "Postgres connected successfully!",
+      database_time: result.rows[0].current_time,
+    });
+  } catch (error) {
+    console.error("Error connecting to Postgres:", error);
+    res.status(500).json({ message: "Failed to connect to database" });
+  }
 });
 
 // Start server
