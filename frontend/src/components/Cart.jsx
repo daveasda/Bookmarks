@@ -1,24 +1,12 @@
-import { useState } from "react";
+import { useCart } from "../context/CartContext.jsx";
 import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 
-// Temporary cart data.
-// Later, replace this with your actual cart.
-const initialCart = [
-  {
-    id: 1,
-    title: "The Mad Ship",
-    price: 3690,
-    quantity: 1,
-    image: "/the-mad-ship.jfif",
-  },
-];
-
 function Cart() {
   const navigate = useNavigate();
 
-  const [cartItems, setCartItems] = useState(initialCart);
+  const {cartItems, updateQuantity, removeItem, cartTotal,} = useCart();
 
   // Format prices in Sri Lankan Rupees
   const formatPrice = (price) => {
@@ -27,33 +15,6 @@ function Cart() {
       maximumFractionDigits: 2,
     })}`;
   };
-
-  // Increase or decrease quantity
-  const updateQuantity = (id, change) => {
-    setCartItems((previous) =>
-      previous.map((item) =>
-        item.id === id
-          ? {
-              ...item,
-              quantity: Math.max(1, item.quantity + change),
-            }
-          : item
-      )
-    );
-  };
-
-  // Remove a book
-  const removeItem = (id) => {
-    setCartItems((previous) =>
-      previous.filter((item) => item.id !== id)
-    );
-  };
-
-  // Calculate cart total
-  const cartTotal = cartItems.reduce(
-    (total, item) => total + item.price * item.quantity,
-    0
-  );
 
   // Navigate to checkout
   const handleCheckout = () => {

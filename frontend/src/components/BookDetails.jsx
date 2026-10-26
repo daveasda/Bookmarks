@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import { useCart } from "../context/CartContext.jsx";
+
 
 // Temporary book data.
 // Later, this will come from your backend.
@@ -27,6 +29,7 @@ const books = [
 
 function BookDetails() {
   const { id } = useParams();
+  const {addToCart} = useCart();
 
   const book = books.find(
     (item) => String(item.id) === String(id)
@@ -67,8 +70,8 @@ function BookDetails() {
   };
 
   const handleAddToCart = () => {
-    // Temporary frontend-only behaviour.
-    alert(`${quantity} × ${book.title} added to cart (demo).`);
+    addToCart(book, quantity);
+    alert(`${quantity} × ${book.title} added to cart!`);
   };
 
   const handleSubmitRating = () => {

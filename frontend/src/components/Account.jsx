@@ -36,10 +36,41 @@ function Account() {
   };
 
   // Frontend-only login
-  const handleLogin = (event) => {
+  const handleLogin = async (event) => {
     event.preventDefault();
-    navigate("/my-profile");
-  };
+
+    try {
+      const response = await fetch(
+        "http://localhost:5000/api/auth/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify(login),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        alert(data.message);
+        return;
+      }
+
+      // Redirect according to account role
+      if (data.account.role === "admin") {
+        navigate("/admin-dashboard", { replace: true });
+      } else {
+        navigate("/my-profile", { replace: true });
+      }
+
+    } catch (error) {
+      console.error("Login error:", error);
+      alert("Unable to connect to the backend.");
+    }
+};
 
   // Frontend-only registration
   const handleRegister = async (event) => {
@@ -50,14 +81,14 @@ function Account() {
         {
           method: "POST",
           headers: {"Content-Type": "application/json"},
+          credentials: "include",
           body: JSON.stringify(register)
         }
       );
       const data = await response.json();
       
       if (!response.ok) { alert(data.message); return;}
-      console.log("Registration successful! Please log in. ")
-      setRegister({ full_name:"", email:"", password:""});
+      navigate("/my-profile", {replace: true});
     }
     catch (error) {
       console.error("Registration error:", error);
