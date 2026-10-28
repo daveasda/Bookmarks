@@ -8,7 +8,7 @@
   --accent: #A7BED3;
   --highlight: #A7BED3;
   --teal: #1F4E79;
-  --page-background: #07233A;
+  --page-background: #FFFFFF;
   --background: #FFFFFF;
   --search-background: #F4F6F8;
   --panel: #F4F6F8;
@@ -57,7 +57,7 @@ body {
   font-family: var(--font-body);
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-regular);
-  color: var(--text-light);
+  color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -618,242 +618,169 @@ select {
   }
 }
 
+/* About Us — self-contained, cohesive with Home and Shop */
 .about-page {
-  background-color: var(--page-background);
-  color: var(--text-light);
+  background: var(--page-background);
+  color: #fff;
 }
-
-.about-hero {
-  padding: 95px 5% 100px;
-  text-align: center;
+.about-page .about-banner {
+  width: 100%;
+  overflow: hidden;
+  background: var(--page-background);
 }
-
-.about-eyebrow {
-  font-family: var(--font-body);
-  font-size: var(--font-size-2xs);
-  font-weight: var(--font-weight-regular);
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--highlight);
-  margin: 0 0 20px;
-}
-
-.about-hero h1 {
-  font-family: var(--font-heading);
-  font-size: var(--font-size-4xl);
-  font-weight: var(--font-weight-regular);
-  line-height: 1.2;
-  margin: 0 0 25px;
-}
-
-.about-hero-text {
-  max-width: 650px;
-  margin: 0 auto;
-  font-size: var(--font-size-md);
-  line-height: 1.8;
-  color: var(--accent);
-}
-
-.about-story {
-  display: grid;
-  grid-template-columns: 380px 520px;
-  justify-content: center;
-  align-items: center;
-  gap: 65px;
-  padding: 70px 5%;
-  background-color: var(--panel);
-  color: var(--text-primary);
-}
-
-.about-story-image {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 0;
-}
-
-.about-story-image img {
+.about-page .about-banner .hero-image {
   display: block;
   width: 100%;
-  max-width: 360px;
   height: auto;
   object-fit: contain;
 }
-
-.about-story-content {
-  min-width: 0;
-  max-width: 520px;
+.about-page .about-story {
+  padding: 88px 5%;
+  background: var(--page-background);
 }
-
-.about-story-content .about-eyebrow {
-  color: var(--secondary);
-  margin-bottom: 15px;
+.about-page .about-story-inner,
+.about-page .about-philosophy-inner {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
 }
-
-.about-story-content h2 {
-  font-family: var(--font-heading);
-  font-size: var(--font-size-3xl);
-  font-weight: var(--font-weight-regular);
-  color: var(--primary);
-  margin: 0 0 18px;
-}
-
-.about-small-divider {
-  width: 65px;
-  height: 2px;
-  background-color: var(--accent);
-  margin-bottom: 25px;
-}
-
-.about-story-content p:not(.about-eyebrow) {
-  font-family: var(--font-body);
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-regular);
-  line-height: 1.9;
-  color: var(--text-secondary);
-  margin: 0 0 18px;
-}
-
-.about-philosophy {
-  padding: 100px 8%;
-  text-align: center;
-}
-
-.about-philosophy h2 {
-  font-family: var(--font-heading);
-  font-size: var(--font-size-3xl);
-  font-weight: var(--font-weight-regular);
-  margin: 0 0 25px;
-}
-
-.about-philosophy > p:not(.about-eyebrow) {
-  max-width: 650px;
-  margin: 0 auto 60px;
-  font-size: var(--font-size-base);
-  line-height: 1.9;
-  color: var(--accent);
-}
-
-.about-features {
+.about-page .about-story-inner {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 30px;
+  grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+  align-items: center;
+  gap: clamp(45px, 7vw, 110px);
 }
-
-.about-feature {
-  padding: 35px 25px;
-  border: 1px solid var(--accent);
-  text-align: center;
+.about-page .about-story-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-
-.about-feature-number {
+.about-page .about-story-image img {
   display: block;
-  font-size: var(--font-size-compact);
-  color: var(--highlight);
-  margin-bottom: 20px;
+  width: 100%;
+  max-width: 380px;
+  height: auto;
 }
-
-.about-feature h3 {
-  font-family: var(--font-heading);
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-regular);
-  margin: 0 0 15px;
-}
-
-.about-feature p {
-  font-size: var(--font-size-compact);
-  line-height: 1.8;
+.about-page .about-story-content { max-width: 590px; }
+.about-page .about-eyebrow {
+  margin: 0 0 14px;
   color: var(--accent);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2.4px;
+  text-transform: uppercase;
+}
+.about-page .about-story-content h2,
+.about-page .about-philosophy h2,
+.about-page .about-cta h2 {
+  margin: 0;
+  color: #fff;
+  font-family: var(--font-heading);
+  font-size: clamp(28px, 3vw, 38px);
+  font-weight: 800;
+  letter-spacing: -.8px;
+  line-height: 1.2;
+}
+.about-page .about-small-divider {
+  width: 64px;
+  height: 2px;
+  margin: 23px 0 26px;
+  background: var(--accent);
+}
+.about-page .about-story-content p:not(.about-eyebrow),
+.about-page .about-section-heading > p:not(.about-eyebrow),
+.about-page .about-cta p {
+  color: #d8e5f0;
+  font-size: 15px;
+  line-height: 1.85;
+}
+.about-page .about-story-content p:not(.about-eyebrow) { margin: 0 0 18px; }
+.about-page .about-story-content p:last-child { margin-bottom: 0; }
+.about-page .about-philosophy {
+  padding: 82px 5% 96px;
+  background: #0b2b45;
+}
+.about-page .about-section-heading { margin-bottom: 34px; }
+.about-page .about-section-heading h2 { margin-bottom: 23px; }
+.about-page .about-section-heading .section-divider {
+  height: 1px;
+  margin-bottom: 22px;
+  background: var(--accent);
+  opacity: .55;
+}
+.about-page .about-section-heading > p:not(.about-eyebrow) {
+  max-width: 710px;
   margin: 0;
 }
-
-.about-cta {
-  padding: 90px 5%;
-  background-color: var(--panel);
-  color: var(--text-primary);
+.about-page .about-features {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+.about-page .about-feature {
+  min-height: 210px;
+  padding: 32px 30px;
+  background: #103550;
+  border: 1px solid rgba(167,190,211,.3);
+  border-radius: 8px;
+}
+.about-page .about-feature-number {
+  display: block;
+  margin-bottom: 23px;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+.about-page .about-feature h3 {
+  margin: 0 0 12px;
+  color: #fff;
+  font-family: var(--font-heading);
+  font-size: 21px;
+  font-weight: 700;
+}
+.about-page .about-feature p {
+  margin: 0;
+  color: #d8e5f0;
+  font-size: 14px;
+  line-height: 1.75;
+}
+.about-page .about-cta {
+  padding: 92px 5% 100px;
+  background: var(--page-background);
   text-align: center;
 }
-
-.about-cta h2 {
-  font-family: var(--font-heading);
-  font-size: var(--font-size-3xl);
-  font-weight: var(--font-weight-regular);
-  color: var(--primary);
-  margin: 0 0 20px;
-}
-
-.about-cta p {
-  font-size: var(--font-size-base);
-  line-height: 1.8;
-  color: var(--text-secondary);
-  margin: 0 0 35px;
-}
-
-.about-shop-btn {
+.about-page .about-cta-inner { max-width: 700px; margin: 0 auto; }
+.about-page .about-cta h2 { margin-bottom: 18px; }
+.about-page .about-cta p { margin: 0 0 30px; }
+.about-page .about-shop-btn {
   display: inline-block;
-  padding: 15px 35px;
-  background-color: var(--primary);
-  color: var(--text-light);
+  padding: 15px 32px;
+  border-radius: 6px;
+  background: #fff;
+  color: var(--primary);
+  font-size: 14px;
+  font-weight: 700;
   text-decoration: none;
-  font-family: var(--font-body);
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-regular);
-  border-radius: 4px;
-  transition: background-color 0.2s ease;
+  transition: background-color .2s ease, transform .2s ease;
 }
-
-.about-shop-btn:hover {
-  background-color: var(--primary-hover);
+.about-page .about-shop-btn:hover {
+  background: var(--accent);
+  transform: translateY(-2px);
 }
-
-@media (max-width: 1050px) {
-  .about-story {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: 35px;
-    padding: 60px 5%;
-  }
-  .about-story-image img {
-    max-width: 320px;
-    height: auto;
-  }
+@media (max-width: 800px) {
+  .about-page .about-story { padding: 60px 5%; }
+  .about-page .about-story-inner { grid-template-columns: 1fr; gap: 35px; }
+  .about-page .about-story-image img { max-width: 300px; }
+  .about-page .about-story-content { max-width: none; }
+  .about-page .about-philosophy { padding: 60px 5% 70px; }
+  .about-page .about-features { grid-template-columns: 1fr; gap: 16px; }
+  .about-page .about-feature { min-height: 0; }
+  .about-page .about-cta { padding: 65px 5% 75px; }
 }
-
-@media (max-width: 700px) {
-  .about-hero {
-    padding: 65px 5%;
-  }
-  .about-hero h1 {
-    font-size: var(--font-size-3xl);
-  }
-  .about-story {
-    grid-template-columns: 1fr;
-    gap: 30px;
-    padding: 50px 6%;
-  }
-  .about-story-image img {
-    max-width: 280px;
-    height: auto;
-  }
-  .about-story-content {
-    max-width: 100%;
-  }
-  .about-story-content h2 {
-    font-size: var(--font-size-2xl);
-  }
-  .about-philosophy {
-    padding: 65px 5%;
-  }
-  .about-features {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-  .about-cta {
-    padding: 65px 5%;
-  }
-  .about-cta h2,
-  .about-philosophy h2 {
-    font-size: var(--font-size-2xl);
-  }
+@media (max-width: 600px) {
+  .about-page .about-story-image img { max-width: 250px; }
+  .about-page .about-feature { padding: 25px; }
 }
 
 .checkout-page {
@@ -2367,4 +2294,1473 @@ html {
 .profile-cancel-btn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+
+
+/* =========================================================
+   BookMarks | Spacious white storefront redesign
+   Navbar rules intentionally unchanged.
+   ========================================================= */
+
+/* Home / Shop: clean white bookstore shelves */
+.book-section {
+  background: #fff;
+  padding: 76px 5% 84px;
+}
+.book-section-heading { margin-bottom: 38px; }
+.book-section-heading h2 {
+  color: var(--text-primary);
+  font-size: clamp(26px, 2.5vw, 36px);
+  letter-spacing: -0.8px;
+  margin-bottom: 19px;
+}
+.section-divider { background: var(--border-light); opacity: 1; }
+.book-grid { gap: 44px 28px; }
+.book-card { color: var(--text-primary); transition: transform .2s ease; }
+.book-card:hover { transform: translateY(-3px); }
+.book-card-cover { padding: 12px 8px; }
+.book-card-image { max-width: 205px; height: 280px; }
+.book-card-content { padding-top: 18px; }
+.book-category { color: var(--secondary); font-weight: 600; }
+.book-card h3 { color: var(--text-primary); }
+.book-author { color: var(--text-secondary); }
+.book-price { color: var(--primary); }
+
+/* About: airy editorial sections */
+.about-page { background: #fff; color: var(--text-primary); }
+.about-page .about-banner { background: #fff; }
+.about-page .about-story { background: #fff; padding-top: 105px; padding-bottom: 105px; }
+.about-page .about-story-inner,
+.about-page .about-philosophy-inner { max-width: 1200px; }
+.about-page .about-eyebrow { color: var(--secondary); }
+.about-page .about-story-content h2,
+.about-page .about-philosophy h2,
+.about-page .about-cta h2 { color: var(--text-primary); }
+.about-page .about-story-content p:not(.about-eyebrow),
+.about-page .about-section-heading > p:not(.about-eyebrow),
+.about-page .about-cta p { color: var(--text-secondary); }
+.about-page .about-small-divider { background: var(--secondary); }
+.about-page .about-philosophy { background: #f4f6f8; padding-top: 100px; padding-bottom: 110px; }
+.about-page .about-section-heading { margin-bottom: 44px; }
+.about-page .about-section-heading .section-divider { background: var(--border-light); opacity: 1; }
+.about-page .about-features { gap: 24px; }
+.about-page .about-feature {
+  background: #fff;
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  padding: 38px 32px;
+  min-height: 220px;
+  box-shadow: 0 4px 16px rgba(7,35,58,.035);
+}
+.about-page .about-feature-number { color: var(--secondary); }
+.about-page .about-feature h3 { color: var(--text-primary); }
+.about-page .about-feature p { color: var(--text-secondary); }
+.about-page .about-cta { background: #fff; padding-top: 112px; padding-bottom: 120px; }
+.about-page .about-shop-btn { background: var(--primary); color: #fff; }
+.about-page .about-shop-btn:hover { background: var(--primary-hover); color: #fff; }
+
+/* Shopping, account and detail screens */
+.checkout-page, .cart-page, .account-page, .profile-page, .book-details-page {
+  background: #fff;
+  padding-top: 76px;
+  padding-bottom: 105px;
+}
+.checkout-container, .cart-container, .account-container,
+.profile-container, .book-details-container { max-width: 1200px; }
+.checkout-title, .cart-title, .account-title, .profile-title { margin-bottom: 50px; }
+.checkout-billing, .checkout-summary, .cart-table, .account-box,
+.profile-welcome, .profile-info-card, .profile-stat-card,
+.profile-table-wrapper, .book-details-specs {
+  box-shadow: none;
+  border-color: var(--border-light);
+}
+.checkout-layout, .account-layout { gap: 56px; }
+.checkout-layout::before, .account-layout::before { display: none; }
+.checkout-billing, .checkout-summary, .account-box { padding: 36px; }
+.checkout-cod { background: var(--search-background); }
+.book-details-layout { gap: 95px; }
+.book-details-description { line-height: 1.85; }
+
+/* Auth screens: readable on white */
+.auth-page { background: #fff; color: var(--text-primary); }
+.auth-form h1 { color: var(--text-primary); }
+.switch-text { color: var(--text-secondary); }
+.switch-text a { color: var(--secondary); }
+
+@media (max-width: 900px) {
+  .book-section { padding-top: 56px; padding-bottom: 65px; }
+  .book-grid { gap: 30px 20px; }
+  .about-page .about-story { padding-top: 70px; padding-bottom: 70px; }
+  .about-page .about-philosophy { padding-top: 70px; padding-bottom: 80px; }
+  .about-page .about-cta { padding-top: 75px; padding-bottom: 85px; }
+  .book-details-layout { gap: 40px; }
+}
+@media (max-width: 600px) {
+  .book-section { padding: 45px 4% 55px; }
+  .book-grid { gap: 26px 16px; }
+  .book-card-cover { padding: 6px 0; }
+  .book-card-image { max-width: 145px; height: 190px; }
+  .book-card-content { padding-top: 12px; }
+  .checkout-page, .cart-page, .account-page, .profile-page, .book-details-page {
+    padding-top: 42px;
+    padding-bottom: 65px;
+  }
+  .checkout-billing, .checkout-summary, .account-box { padding: 22px 18px; }
+  .about-page .about-feature { padding: 28px; }
+}
+
+/* BookMarks editorial pages — scoped so navbar and other pages remain unchanged */
+.bm-editorial {background:#fff;color:#14213d;overflow-x:clip}
+.bm-editorial .bm-hero {width:100%;overflow:hidden;line-height:0}
+.bm-editorial .bm-hero img {display:block;width:100%;height:auto;max-height:480px;object-fit:contain}
+.bm-editorial .bm-intro,.bm-editorial .bm-shop-intro {text-align:center;max-width:820px;margin:0 auto;padding:76px 24px 60px}
+.bm-editorial .bm-kicker {display:block;font-size:11px;font-weight:800;letter-spacing:2.2px;color:#1f4e79;margin-bottom:16px}
+.bm-editorial .bm-intro h1,.bm-editorial .bm-shop-intro h1 {font-size:clamp(30px,4vw,48px);line-height:1.15;margin:0 0 18px;color:#14213d}
+.bm-editorial .bm-intro p,.bm-editorial .bm-shop-intro p,.bm-editorial .bm-genre-panel p {color:#49637c;font-size:16px;line-height:1.8;margin:0 auto 26px;max-width:620px}
+.bm-editorial .bm-button {display:inline-flex;align-items:center;justify-content:center;background:#14213d;color:white;text-decoration:none;padding:13px 26px;border-radius:5px;font-size:14px;font-weight:700}
+.bm-editorial .bm-button:hover {background:#1f4e79}
+.bm-editorial .bm-collections {max-width:1340px;margin:auto}
+.bm-editorial .book-section {padding:44px clamp(20px,4vw,64px) 72px;background:#fff;clear:both;height:auto;min-height:0;overflow:visible}
+.bm-editorial .book-section-heading h2 {color:#14213d!important;font-size:clamp(23px,2.3vw,30px);font-weight:700}
+.bm-editorial .book-grid {display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(16px,2.8vw,38px);height:auto;align-items:start}
+.bm-editorial .book-card {color:#14213d;min-width:0;height:auto}
+.bm-editorial .book-card h3 {color:#14213d}
+.bm-editorial .bm-promo {text-align:center;background:#142d47;color:#fff;padding:74px 24px 80px}
+.bm-editorial .bm-promo .bm-kicker {color:#c1d5e8}
+.bm-editorial .bm-promo h2,.bm-editorial .bm-genre-panel h2 {font-size:clamp(26px,3.2vw,40px);margin:0 0 16px}
+.bm-editorial .bm-promo p {color:#e0e9f2;margin:0 0 28px;line-height:1.7}
+.bm-editorial .bm-button-light {background:white;color:#14213d}
+.bm-editorial .bm-genre-panel {text-align:center;background:#f4f6f8;padding:76px 24px 88px}
+.bm-editorial .bm-genre-links {display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.bm-editorial .bm-genre-links a {border:1px solid #c9d6e3;background:white;color:#14213d;padding:12px 23px;border-radius:30px;text-decoration:none;font-size:14px}
+.bm-editorial .bm-genre-links a:hover {border-color:#1f4e79;background:#eaf1f7}
+.bm-editorial .bm-shop-intro {padding-bottom:42px}
+.bm-editorial .bm-shop-catalog {max-width:1340px;margin:0 auto;padding:0 clamp(20px,4vw,64px) 80px}
+.bm-editorial .bm-shop-toolbar {display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;border-top:1px solid #e0e8f0;border-bottom:1px solid #e0e8f0;padding:20px 0}
+.bm-editorial .bm-filter-list {display:flex;flex-wrap:wrap;gap:10px}
+.bm-editorial .bm-filter {cursor:pointer;border:1px solid #d5dfe9;background:white;color:#14213d;padding:10px 17px;border-radius:24px;font-size:13px}
+.bm-editorial .bm-filter.active {background:#14213d;color:#fff;border-color:#14213d}
+.bm-editorial .bm-sort {display:flex;align-items:center;gap:10px;font-size:13px;color:#49637c}
+.bm-editorial .bm-sort select {border:1px solid #d5dfe9;border-radius:5px;padding:10px;background:#fff;color:#14213d;max-width:180px}
+.bm-editorial .bm-results {color:#49637c;font-size:13px;margin:24px 0 0}
+.bm-editorial .bm-shop-catalog .book-section {padding:20px 0 20px}
+.bm-editorial .bm-empty {padding:50px 0;color:#49637c}
+/* About page refinement; scoped below its existing styles */
+.about-page .about-story-inner,.about-page .about-philosophy-inner {max-width:1200px}
+.about-page .about-story {padding-top:100px;padding-bottom:100px}
+.about-page .about-philosophy {padding-top:90px;padding-bottom:100px}
+.about-page .about-feature {transition:transform .2s ease,border-color .2s ease}
+.about-page .about-feature:hover {transform:translateY(-3px);border-color:#a7bed3}
+.about-page .about-cta {padding-top:100px;padding-bottom:110px}
+@media(max-width:900px){.bm-editorial .book-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.bm-editorial .bm-intro,.bm-editorial .bm-shop-intro{padding:58px 22px 42px}.about-page .about-story,.about-page .about-philosophy,.about-page .about-cta{padding-top:65px;padding-bottom:70px}}
+@media(max-width:600px){.bm-editorial .book-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 14px}.bm-editorial .book-section{padding:32px 18px 48px}.bm-editorial .bm-promo,.bm-editorial .bm-genre-panel{padding:56px 20px}.bm-editorial .bm-intro,.bm-editorial .bm-shop-intro{padding:48px 20px 36px}.bm-editorial .bm-intro p,.bm-editorial .bm-shop-intro p{font-size:14px}.bm-editorial .bm-shop-catalog{padding:0 18px 50px}.bm-editorial .bm-shop-toolbar{align-items:stretch;flex-direction:column;gap:14px}.bm-editorial .bm-filter{padding:9px 12px;font-size:12px}.bm-editorial .bm-genre-links a{padding:10px 14px}.about-page .about-story,.about-page .about-philosophy,.about-page .about-cta{padding-top:48px;padding-bottom:55px}}
+
+
+/* ==========================================
+   ACCOUNT PAGE — RESPONSIVE DESIGN
+   ========================================== */
+
+/* Tablet and smaller screens */
+@media (max-width: 900px) {
+
+  .account-layout {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .account-layout::before {
+    display: none;
+  }
+
+  .account-box {
+    min-height: auto;
+    width: 100%;
+  }
+
+}
+
+/* Mobile phones */
+@media (max-width: 600px) {
+
+  .account-page {
+    padding: 35px 5% 60px;
+  }
+
+  .account-container {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .account-title {
+    font-size: 28px;
+    margin-bottom: 25px;
+  }
+
+  .account-layout {
+    gap: 25px;
+  }
+
+  .account-box {
+    padding: 24px 18px;
+    min-width: 0;
+  }
+
+  .account-box h2 {
+    font-size: 17px;
+    margin-bottom: 22px;
+  }
+
+  .account-form {
+    gap: 18px;
+  }
+
+  .account-field input {
+    width: 100%;
+    min-width: 0;
+    font-size: 16px;
+  }
+
+  .account-submit-btn {
+    width: 100%;
+    min-width: 0;
+    padding: 14px;
+  }
+
+}
+
+
+/* Add to Cart success message */
+.book-cart-success {
+  color: #167347;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.5;
+  margin: -20px 0 30px;
+}
+
+
+/* ==========================================
+   BOOKMARKS — BOOKSTORE HOMEPAGE
+   ========================================== */
+
+.bm-home {
+  background: #ffffff;
+  color: #14213d;
+}
+
+.bm-home main {
+  width: 100%;
+}
+
+.bm-home .home-featured-banner {
+  width: 100%;
+  background: #f4f6f8;
+}
+
+.bm-home .home-featured-banner a,
+.bm-home .home-reading-banner a {
+  display: block;
+}
+
+.bm-home .home-featured-banner img,
+.bm-home .home-reading-banner img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Typography */
+
+.bm-home .home-eyebrow {
+  display: block;
+  font-family: "Inter", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #1f4e79;
+  margin-bottom: 14px;
+}
+
+.bm-home .home-welcome h1,
+.bm-home .home-shelf-heading h2,
+.bm-home .home-feature-story h2,
+.bm-home .home-final-cta h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  letter-spacing: -1.3px;
+  color: #14213d;
+}
+
+/* Welcome */
+
+.bm-home .home-welcome {
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 76px 24px 84px;
+  text-align: center;
+}
+
+.bm-home .home-welcome h1 {
+  font-size: clamp(34px, 4.5vw, 58px);
+  line-height: 1.12;
+  margin: 0 0 22px;
+}
+
+.bm-home .home-welcome p,
+.bm-home .home-final-cta p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #49637c;
+  max-width: 570px;
+  margin: 0 auto 28px;
+}
+
+.bm-home .home-primary-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 28px;
+  background: #14213d;
+  color: white;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.bm-home .home-primary-link:hover {
+  background: #1f4e79;
+}
+
+/* Book shelves */
+
+.bm-home .home-shelf {
+  max-width: 1340px;
+  margin: 0 auto;
+  padding: 30px 5% 65px;
+}
+
+.bm-home .home-shelf-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 24px;
+  border-bottom: 1px solid #e0e8f0;
+  padding-bottom: 20px;
+  margin-bottom: 10px;
+}
+
+.bm-home .home-shelf-heading h2 {
+  font-size: clamp(30px, 3vw, 42px);
+  line-height: 1.15;
+  margin: 0;
+}
+
+.bm-home .home-view-all {
+  flex-shrink: 0;
+  color: #1f4e79;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+
+.bm-home .home-view-all:hover {
+  color: #14213d;
+}
+
+/* Reuse existing BookSection cards */
+
+.bm-home .home-shelf .book-section {
+  padding: 25px 0 10px;
+  background: transparent;
+}
+
+.bm-home .home-shelf .book-section-heading {
+  display: none;
+}
+
+.bm-home .home-shelf .book-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 28px;
+  align-items: start;
+}
+
+.bm-home .home-shelf .book-card {
+  min-width: 0;
+}
+
+.bm-home .home-shelf .book-card-image {
+  width: 100%;
+  max-width: 200px;
+  height: 270px;
+  object-fit: contain;
+}
+
+.bm-home .home-shelf .book-card h3 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: #14213d;
+}
+
+/* Wide reading banner */
+
+.bm-home .home-reading-banner {
+  width: 100%;
+  margin: 20px 0 75px;
+  overflow: hidden;
+}
+
+/* Fiction feature */
+
+.bm-home .home-feature-story {
+  max-width: 1340px;
+  margin: 35px auto 85px;
+  padding: 0 5%;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: 55px;
+}
+
+.bm-home .home-feature-story-image {
+  overflow: hidden;
+  background: #f4f6f8;
+}
+
+.bm-home .home-feature-story-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.bm-home .home-feature-story-content h2 {
+  font-size: clamp(34px, 3.5vw, 52px);
+  line-height: 1.15;
+  margin: 0 0 22px;
+}
+
+.bm-home .home-feature-story-content p {
+  font-size: 16px;
+  line-height: 1.85;
+  color: #49637c;
+  margin: 0 0 28px;
+}
+
+/* Promotional images */
+
+.bm-home .home-promo-grid {
+  max-width: 1340px;
+  margin: 25px auto 90px;
+  padding: 0 5%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.bm-home .home-promo-card {
+  display: block;
+  overflow: hidden;
+  background: #f4f6f8;
+}
+
+.bm-home .home-promo-card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 2 / 1;
+  object-fit: cover;
+  transition: transform 0.25s ease;
+}
+
+.bm-home .home-promo-card:hover img {
+  transform: scale(1.02);
+}
+
+/* Final invitation */
+
+.bm-home .home-final-cta {
+  padding: 90px 24px 100px;
+  background: #f4f6f8;
+  text-align: center;
+}
+
+.bm-home .home-final-cta h2 {
+  font-size: clamp(32px, 4vw, 52px);
+  line-height: 1.15;
+  margin: 0 auto 22px;
+  max-width: 760px;
+}
+
+/* Tablet */
+
+@media (max-width: 900px) {
+  .bm-home .home-shelf .book-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 25px;
+  }
+
+  .bm-home .home-feature-story {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .bm-home .home-feature-story-content {
+    max-width: 650px;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+  .bm-home .home-welcome {
+    padding: 48px 20px 58px;
+  }
+
+  .bm-home .home-welcome h1 {
+    font-size: 36px;
+  }
+
+  .bm-home .home-shelf {
+    padding: 20px 5% 45px;
+  }
+
+  .bm-home .home-shelf-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .bm-home .home-shelf-heading h2 {
+    font-size: 30px;
+  }
+
+  .bm-home .home-shelf .book-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px 14px;
+  }
+
+  .bm-home .home-shelf .book-card-image {
+    max-width: 145px;
+    height: 195px;
+  }
+
+  .bm-home .home-shelf .book-card h3 {
+    font-size: 16px;
+  }
+
+  .bm-home .home-reading-banner {
+    margin: 10px 0 45px;
+  }
+
+  .bm-home .home-feature-story {
+    margin: 20px auto 55px;
+    padding: 0 5%;
+  }
+
+  .bm-home .home-feature-story-content h2 {
+    font-size: 34px;
+  }
+
+  .bm-home .home-promo-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    margin-bottom: 60px;
+  }
+
+  .bm-home .home-promo-card img {
+    height: auto;
+    aspect-ratio: auto;
+    object-fit: contain;
+  }
+
+  .bm-home .home-final-cta {
+    padding: 65px 20px 75px;
+  }
+}
+
+
+/* ==========================================
+   FEATURED BOOK COLLECTION
+   ========================================== */
+
+.bm-home .home-featured-collection {
+  max-width: 1340px;
+  margin: 40px auto 90px;
+  padding: 0 5%;
+  display: grid;
+  grid-template-columns: 38% minmax(0, 1fr);
+  gap: 28px;
+  align-items: stretch;
+}
+
+/* Left promotional panel */
+
+.bm-home .home-featured-info {
+  background: #f1f4f8;
+  padding: 50px 38px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.bm-home .home-featured-info h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: #14213d;
+  margin: 0 0 22px;
+}
+
+.bm-home .home-featured-info p {
+  color: #49637c;
+  font-size: 15px;
+  line-height: 1.8;
+  margin: 0 0 24px;
+}
+
+.bm-home .home-featured-link {
+  color: #1f4e79;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.bm-home .home-featured-link:hover {
+  text-decoration: underline;
+}
+
+/* Right book collection */
+
+.bm-home .home-featured-books {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.bm-home .home-featured-books .book-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  align-items: start;
+}
+
+.bm-home .home-featured-books .book-card {
+  min-width: 0;
+}
+
+.bm-home .home-featured-books .book-card img {
+  width: 100%;
+  height: 225px;
+  object-fit: contain;
+}
+
+.bm-home .home-featured-books .book-section {
+  padding: 0;
+  margin: 0;
+  background: transparent;
+}
+
+/* Tablet */
+
+@media (max-width: 1000px) {
+  .bm-home .home-featured-collection {
+    grid-template-columns: 1fr;
+  }
+
+  .bm-home .home-featured-info {
+    padding: 40px 30px;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+  .bm-home .home-featured-collection {
+    margin: 25px auto 60px;
+    padding: 0 5%;
+    gap: 25px;
+  }
+
+  .bm-home .home-featured-info {
+    padding: 35px 24px;
+  }
+
+  .bm-home .home-featured-info h2 {
+    font-size: 30px;
+  }
+
+  .bm-home .home-featured-books .book-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px 14px;
+  }
+
+  .bm-home .home-featured-books .book-card img {
+    height: 190px;
+  }
+}
+
+
+/* LITERARY FEATURE */
+
+.bm-home .home-literary-feature {
+  max-width: 1340px;
+  margin: 60px auto 90px;
+  padding: 0 5%;
+  display: grid;
+  grid-template-columns: 40% minmax(0, 1fr);
+  align-items: stretch;
+}
+
+.bm-home .home-literary-content {
+  background: #f5f2ed;
+  padding: 45px 35px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.bm-home .home-literary-content h2,
+.bm-home .home-fantasy-content h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(30px, 3.5vw, 48px);
+  font-weight: 400;
+  line-height: 1.15;
+  margin: 0 0 20px;
+}
+
+.bm-home .home-literary-content p,
+.bm-home .home-fantasy-content p {
+  font-size: 15px;
+  line-height: 1.8;
+  margin: 0 0 26px;
+}
+
+.bm-home .home-literary-content p {
+  color: #49637c;
+}
+
+.bm-home .home-literary-art {
+  min-width: 0;
+  overflow: hidden;
+  background: #f5f2ed;
+}
+
+.bm-home .home-literary-art img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* FANTASY FEATURE */
+
+.bm-home .home-fantasy-feature {
+  max-width: 1340px;
+  margin: 60px auto 90px;
+  padding: 0 5%;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  align-items: stretch;
+}
+
+.bm-home .home-fantasy-art {
+  min-width: 0;
+  overflow: hidden;
+  background: #14213d;
+}
+
+.bm-home .home-fantasy-art img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.bm-home .home-fantasy-content {
+  background: #14213d;
+  color: #ffffff;
+  padding: 45px 35px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.bm-home .home-fantasy-content h2 {
+  color: #ffffff;
+}
+
+.bm-home .home-fantasy-content p {
+  color: #d6e1ef;
+}
+
+.bm-home .home-fantasy-content .home-eyebrow {
+  color: #a9c4e5;
+}
+
+.bm-home .home-fantasy-button {
+  display: inline-block;
+  background: #ffffff;
+  color: #14213d;
+  padding: 13px 25px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.bm-home .home-fantasy-button:hover {
+  background: #e8eef6;
+}
+
+/* TABLET AND MOBILE */
+
+@media (max-width: 900px) {
+  .bm-home .home-literary-feature,
+  .bm-home .home-fantasy-feature {
+    grid-template-columns: 1fr;
+    margin: 40px auto 65px;
+  }
+
+  .bm-home .home-literary-content,
+  .bm-home .home-fantasy-content {
+    padding: 35px 28px;
+  }
+
+  .bm-home .home-literary-art img,
+  .bm-home .home-fantasy-art img {
+    height: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .bm-home .home-literary-content,
+  .bm-home .home-fantasy-content {
+    padding: 30px 22px;
+  }
+
+  .bm-home .home-literary-content h2,
+  .bm-home .home-fantasy-content h2 {
+    font-size: 32px;
+  }
+}
+
+
+/* ==========================================
+   FICTION FEATURE — MATCH FANTASY DESIGN
+   ========================================== */
+
+.bm-home .home-feature-story {
+  max-width: 1340px;
+  margin: 35px auto 85px;
+  padding: 0 5%;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  align-items: stretch;
+  gap: 0;
+}
+
+/* Left side: image */
+
+.bm-home .home-feature-story-image {
+  background: #14213d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.bm-home .home-feature-story-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Right side: navy content panel */
+
+.bm-home .home-feature-story-content {
+  background: #14213d;
+  color: #ffffff;
+  padding: 45px 35px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.bm-home .home-feature-story-content .home-eyebrow {
+  color: #a9c4e5;
+}
+
+.bm-home .home-feature-story-content h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(30px, 3.5vw, 48px);
+  font-weight: 400;
+  line-height: 1.15;
+  color: #ffffff;
+  margin: 0 0 20px;
+}
+
+.bm-home .home-feature-story-content p {
+  color: #d6e1ef;
+  font-size: 15px;
+  line-height: 1.8;
+  margin: 0 0 26px;
+}
+
+/* White button */
+
+.bm-home .home-feature-story-content .home-primary-link {
+  display: inline-block;
+  background: #ffffff;
+  color: #14213d;
+  padding: 13px 25px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.bm-home .home-feature-story-content .home-primary-link:hover {
+  background: #e8eef6;
+}
+
+/* Tablet */
+
+@media (max-width: 900px) {
+  .bm-home .home-feature-story {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .bm-home .home-feature-story-content {
+    padding: 35px 28px;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+  .bm-home .home-feature-story {
+    margin: 20px auto 55px;
+    padding: 0 5%;
+  }
+
+  .bm-home .home-feature-story-content {
+    padding: 30px 22px;
+  }
+
+  .bm-home .home-feature-story-content h2 {
+    font-size: 32px;
+  }
+}
+
+
+/* ==========================================
+   BOOKMARKS — WIDE RESPONSIVE HOMEPAGE
+   ========================================== */
+
+/* 1. Homepage fills the browser width */
+
+.bm-home,
+.bm-home main {
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+}
+
+.bm-home {
+  overflow-x: clip;
+}
+
+/* 2. Full-width content sections */
+
+.bm-home .home-shelf,
+.bm-home .home-feature-story,
+.bm-home .home-literary-feature,
+.bm-home .home-fantasy-feature,
+.bm-home .home-featured-collection,
+.bm-home .home-promo-grid {
+  width: 100%;
+  max-width: none;
+  margin-left: 0;
+  margin-right: 0;
+  box-sizing: border-box;
+  padding-left: clamp(24px, 4vw, 80px);
+  padding-right: clamp(24px, 4vw, 80px);
+}
+
+/* 3. Wider book collections */
+
+.bm-home .home-shelf {
+  padding-top: 45px;
+  padding-bottom: 70px;
+}
+
+.bm-home .home-shelf .book-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(20px, 2.5vw, 45px);
+  width: 100%;
+}
+
+.bm-home .home-shelf .book-card {
+  width: 100%;
+  min-width: 0;
+}
+
+.bm-home .home-shelf .book-card-image {
+  width: 100%;
+  max-width: 240px;
+  height: 300px;
+  object-fit: contain;
+}
+
+/* 4. Wider Fiction and Fantasy sections */
+
+.bm-home .home-feature-story,
+.bm-home .home-fantasy-feature {
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 0;
+}
+
+.bm-home .home-feature-story-image,
+.bm-home .home-fantasy-art {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #14213d;
+}
+
+.bm-home .home-feature-story-image img,
+.bm-home .home-fantasy-art img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.bm-home .home-feature-story-content,
+.bm-home .home-fantasy-content {
+  padding: clamp(35px, 4vw, 80px);
+}
+
+/* 5. Wider literary spotlight */
+
+.bm-home .home-literary-feature {
+  grid-template-columns: 40% minmax(0, 1fr);
+  gap: 0;
+}
+
+.bm-home .home-literary-content {
+  padding: clamp(35px, 4vw, 80px);
+}
+
+.bm-home .home-literary-art {
+  min-width: 0;
+}
+
+.bm-home .home-literary-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* 6. Wider featured book collection */
+
+.bm-home .home-featured-collection {
+  grid-template-columns: 32% minmax(0, 1fr);
+  gap: clamp(24px, 3vw, 55px);
+}
+
+.bm-home .home-featured-info {
+  padding: clamp(30px, 3vw, 60px);
+}
+
+.bm-home .home-featured-books {
+  min-width: 0;
+}
+
+.bm-home .home-featured-books .book-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(15px, 2vw, 35px);
+}
+
+/* 7. Tablet responsiveness */
+
+@media (max-width: 1000px) {
+
+  .bm-home .home-feature-story,
+  .bm-home .home-fantasy-feature,
+  .bm-home .home-literary-feature,
+  .bm-home .home-featured-collection {
+    grid-template-columns: 1fr;
+  }
+
+  .bm-home .home-shelf .book-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .bm-home .home-featured-books .book-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .bm-home .home-feature-story-content,
+  .bm-home .home-fantasy-content,
+  .bm-home .home-literary-content {
+    padding: 40px 32px;
+  }
+}
+
+/* 8. Mobile responsiveness */
+
+@media (max-width: 600px) {
+
+  .bm-home .home-shelf,
+  .bm-home .home-feature-story,
+  .bm-home .home-literary-feature,
+  .bm-home .home-fantasy-feature,
+  .bm-home .home-featured-collection,
+  .bm-home .home-promo-grid {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .bm-home .home-shelf {
+    padding-top: 25px;
+    padding-bottom: 45px;
+  }
+
+  .bm-home .home-shelf .book-grid,
+  .bm-home .home-featured-books .book-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px 14px;
+  }
+
+  .bm-home .home-shelf .book-card-image {
+    max-width: 100%;
+    height: 200px;
+  }
+
+  .bm-home .home-feature-story,
+  .bm-home .home-fantasy-feature,
+  .bm-home .home-literary-feature,
+  .bm-home .home-featured-collection {
+    gap: 0;
+  }
+
+  .bm-home .home-feature-story-content,
+  .bm-home .home-fantasy-content,
+  .bm-home .home-literary-content,
+  .bm-home .home-featured-info {
+    padding: 32px 22px;
+  }
+
+  .bm-home .home-featured-collection {
+    gap: 24px;
+  }
+
+  .bm-home .home-shelf-heading {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .bm-home .home-shelf-heading h2 {
+    font-size: 29px;
+  }
+
+  .bm-home .home-feature-story-content h2,
+  .bm-home .home-fantasy-content h2,
+  .bm-home .home-literary-content h2 {
+    font-size: 32px;
+  }
+}
+
+
+/* ==========================================
+   BOOKMARKS — ABOUT PAGE REDESIGN
+   ========================================== */
+
+.bm-about {
+  background: #ffffff;
+  color: #14213d;
+}
+
+.bm-about main {
+  width: 100%;
+  max-width: none;
+  overflow: hidden;
+}
+
+/* Banner images */
+
+.bm-about .about-hero,
+.bm-about .about-wide-banner,
+.bm-about .about-adventure {
+  width: 100%;
+  overflow: hidden;
+}
+
+.bm-about .about-hero img,
+.bm-about .about-wide-banner img,
+.bm-about .about-adventure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Shared typography */
+
+.bm-about .about-eyebrow {
+  display: block;
+  color: #1f4e79;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  margin-bottom: 16px;
+}
+
+.bm-about h1,
+.bm-about h2,
+.bm-about .about-story-quote {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  letter-spacing: -1px;
+}
+
+/* Our Story */
+
+.bm-about .about-story {
+  width: 100%;
+  max-width: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 6vw, 120px);
+  align-items: center;
+  padding: 90px clamp(25px, 6vw, 110px);
+  box-sizing: border-box;
+}
+
+.bm-about .about-story-art {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bm-about .about-story-art img {
+  display: block;
+  width: 100%;
+  max-width: 560px;
+  height: auto;
+}
+
+.bm-about .about-story-text {
+  max-width: 650px;
+}
+
+.bm-about .about-story-text h1 {
+  font-size: clamp(42px, 4vw, 64px);
+  line-height: 1.1;
+  margin: 0 0 24px;
+}
+
+.bm-about .about-accent-line {
+  width: 65px;
+  height: 3px;
+  background: #1f4e79;
+  margin-bottom: 30px;
+}
+
+.bm-about .about-story-text p {
+  color: #49637c;
+  font-size: 16px;
+  line-height: 1.9;
+  margin-bottom: 20px;
+}
+
+.bm-about .about-story-text .about-story-quote {
+  color: #14213d;
+  font-size: clamp(22px, 2.4vw, 32px);
+  line-height: 1.4;
+  margin-top: 32px;
+}
+
+/* Values */
+
+.bm-about .about-values {
+  background: #f1f4f8;
+  padding: 90px clamp(25px, 6vw, 110px);
+}
+
+.bm-about .about-values-intro {
+  max-width: 780px;
+  margin-bottom: 40px;
+}
+
+.bm-about .about-values-intro h2 {
+  font-size: clamp(36px, 3.5vw, 52px);
+  margin: 0 0 20px;
+}
+
+.bm-about .about-values-intro p {
+  color: #49637c;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.bm-about .about-values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 25px;
+}
+
+.bm-about .about-value-card {
+  background: #ffffff;
+  border: 1px solid #e1e8f0;
+  padding: 40px 32px;
+  min-width: 0;
+  transition: transform 0.2s ease,
+              box-shadow 0.2s ease;
+}
+
+.bm-about .about-value-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(20, 33, 61, 0.08);
+}
+
+.bm-about .about-value-number {
+  display: block;
+  font-size: 12px;
+  letter-spacing: 2px;
+  font-weight: 700;
+  color: #1f4e79;
+  margin-bottom: 24px;
+}
+
+.bm-about .about-value-card h3 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 28px;
+  font-weight: 400;
+  color: #14213d;
+  margin: 0 0 15px;
+}
+
+.bm-about .about-value-card p {
+  font-size: 15px;
+  line-height: 1.8;
+  color: #49637c;
+  margin: 0;
+}
+
+/* Final CTA */
+
+.bm-about .about-final {
+  text-align: center;
+  background: #14213d;
+  padding: 95px 24px 105px;
+}
+
+.bm-about .about-final .about-eyebrow {
+  color: #a9c4e5;
+}
+
+.bm-about .about-final h2 {
+  color: #ffffff;
+  font-size: clamp(36px, 4vw, 58px);
+  margin: 0 auto 22px;
+  max-width: 850px;
+}
+
+.bm-about .about-final p {
+  color: #d6e1ef;
+  font-size: 16px;
+  line-height: 1.8;
+  max-width: 600px;
+  margin: 0 auto 30px;
+}
+
+.bm-about .about-shop-button {
+  display: inline-block;
+  background: #ffffff;
+  color: #14213d;
+  padding: 15px 30px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.bm-about .about-shop-button:hover {
+  background: #e8eef6;
+}
+
+/* Tablet */
+
+@media (max-width: 900px) {
+  .bm-about .about-story {
+    grid-template-columns: 1fr;
+    gap: 35px;
+    padding: 60px 6%;
+  }
+
+  .bm-about .about-story-art img {
+    max-width: 450px;
+  }
+
+  .bm-about .about-values {
+    padding: 65px 6%;
+  }
+
+  .bm-about .about-values-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+  .bm-about .about-story {
+    padding: 45px 20px 60px;
+  }
+
+  .bm-about .about-story-text h1 {
+    font-size: 42px;
+  }
+
+  .bm-about .about-story-text p {
+    font-size: 15px;
+  }
+
+  .bm-about .about-values {
+    padding: 60px 20px;
+  }
+
+  .bm-about .about-values-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .bm-about .about-value-card {
+    padding: 30px 24px;
+  }
+
+  .bm-about .about-final {
+    padding: 70px 20px 80px;
+  }
+
+  .bm-about .about-final h2 {
+    font-size: 36px;
+  }
 }

@@ -3,29 +3,8 @@ import { useParams } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { useCart } from "../context/CartContext.jsx";
+import { books } from "../data/books.js";
 
-
-// Temporary book data.
-// Later, this will come from your backend.
-const books = [
-  {
-    id: 1,
-    title: "Atomic Habits",
-    author: "James Clear",
-    price: 3500,
-    image: "/atomic-habits.jfif",
-    category: "Self-Help",
-    description:
-      "An easy and proven way to build good habits and break bad ones.",
-    details:
-      "Atomic Habits explores how small, consistent changes can lead to remarkable results. James Clear explains practical strategies for building better habits, overcoming bad routines, and making meaningful improvements in everyday life.",
-    publisher: "Avery",
-    language: "English",
-    format: "Paperback",
-    rating: 4.25,
-  }
-  
-];
 
 function BookDetails() {
   const { id } = useParams();
@@ -39,6 +18,7 @@ function BookDetails() {
   const [userRating, setUserRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
   const [ratingSubmitted, setRatingSubmitted] = useState(false);
+  const [cartMessage, setCartMessage] = useState("");
 
   if (!book) {
     return (
@@ -71,7 +51,9 @@ function BookDetails() {
 
   const handleAddToCart = () => {
     addToCart(book, quantity);
-    alert(`${quantity} × ${book.title} added to cart!`);
+    setCartMessage(
+      `${quantity} × ${book.title} added to cart successfully!`
+    );
   };
 
   const handleSubmitRating = () => {
@@ -162,6 +144,9 @@ function BookDetails() {
                 </button>
 
               </div>
+              {cartMessage && (
+                <p className="book-cart-success" role="status"> {cartMessage} </p>
+              )}
 
               {/* PRODUCT DETAILS */}
               <div className="book-details-extra">
@@ -209,7 +194,7 @@ function BookDetails() {
                     ★★★★★
                   </div>
 
-                  <strong>{book.rating.toFixed(2)} / 5</strong>
+                  <strong> {book.rating == null? "Not rated yet" : `${book.rating.toFixed(2)} /5`} </strong>
 
                   <span>Overall Rating</span>
                 </div>

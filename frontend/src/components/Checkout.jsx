@@ -1,17 +1,8 @@
 import { useState } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-
-// Temporary cart data.
-// Later, this will come from your shopping cart.
-const sampleCart = [
-  {
-    id: 1,
-    title: "The Mad Ship",
-    quantity: 1,
-    price: 3690,
-  },
-];
+import {useCart} from "../context/CartContext.jsx";
+import { useNavigate } from "react-router-dom";
 
 function Checkout() {
   const [form, setForm] = useState({
@@ -27,6 +18,11 @@ function Checkout() {
   });
 
   const [delivery, setDelivery] = useState("home");
+  const navigate = useNavigate();
+  const { cartItems, clearCart } = useCart();
+
+  const [placingOrder, setPlacingOrder] = useState(false);
+  const [orderError, setOrderError] = useState("");
 
   // Update form fields
   const updateForm = (event) => {
@@ -47,9 +43,8 @@ function Checkout() {
   };
 
   // Calculate subtotal
-  const subtotal = sampleCart.reduce(
-    (total, book) => total + book.price * book.quantity,
-    0
+  const subtotal = cartItems.reduce(
+    (total, book) => total + book.price * book.quantity,0
   );
 
   // Calculate shipping
@@ -58,15 +53,25 @@ function Checkout() {
   // Calculate total
   const total = subtotal + shipping;
 
-  // Handle checkout
-  const handleSubmit = (event) => {
+  
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (form.phone !== form.confirmPhone) {
-      alert("Phone numbers do not match.");
+    if (placingOrder) return;
+
+    setOrderError("");
+
+    if (cartItems.length === 0) {
+      setOrderError("Your cart is empty.");
       return;
     }
 
+    if (form.phone !== form.confirmPhone) {
+      setOrderError("Phone numbers do not match.");
+      return;
+    }
+
+    // Prepare the request expected by Express.
     const orderData = {
       customer: {
         email: form.email,
@@ -78,20 +83,61 @@ function Checkout() {
         city: form.city,
         phone: form.phone,
       },
-      items: sampleCart,
+      items: cartItems.map((book) => ({
+        id: book.id,
+        quantity: book.quantity,
+      })),
       deliveryMethod: delivery,
-      paymentMethod: "cash_on_delivery",
-      subtotal,
-      shipping,
-      total,
     };
 
-    console.log("Order details:", orderData);
+    setPlacingOrder(true);
 
-    alert(
-      "Order details validated. Actual order placement will be available after backend integration."
-    );
+    try {
+      const response = await fetch(
+        "http://localhost:5000/api/orders/guest",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(orderData),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setOrderError(data.message || "Unable to place order.");
+        return;
+      }
+
+      // The backend confirmed the order was saved.
+      const savedOrder = data.order;
+
+      console.log("Order successfully saved to database", {
+        orderId: savedOrder.orderId,
+        placedAt: savedOrder.placedAt,
+        items: savedOrder.items,
+        subtotal: savedOrder.subtotal,
+        deliveryFee: savedOrder.deliveryFee,
+        total: savedOrder.total
+      });
+
+      clearCart();
+
+      navigate("/order-success", {
+        replace: true,
+        state: { order: savedOrder },
+      });
+
+    } catch (error) {
+      console.error("Checkout error:", error);
+      setOrderError("Unable to connect to the server. Please try again.");
+    } finally {
+      setPlacingOrder(false);
+    }
   };
+
 
   return (
     <>
@@ -277,7 +323,7 @@ function Checkout() {
               </div>
 
               {/* Products */}
-              {sampleCart.map((book) => (
+              {cartItems.map((book) => (
                 <div
                   className="checkout-summary-row"
                   key={book.id}
@@ -374,13 +420,19 @@ function Checkout() {
                 </div>
               </div>
 
-              {/* Place Order */}
+              {orderError && (
+                <p role="alert" style={{ color: "#b42318" }}>
+                  {orderError}
+                </p>
+              )}
+
               <button
-                type="submit"
-                className="checkout-place-order"
+                  type="submit"
+                  className="checkout-place-order"
+                  disabled={placingOrder || cartItems.length === 0}
               >
-                Place Order
-              </button>
+                  {placingOrder ? "Placing Order..." : "Place Order"}
+                </button>
 
             </aside>
 

@@ -9,6 +9,7 @@ import MyProfile from './MyProfile.jsx'
 import Account from './Account.jsx'
 import BookDetails from './BookDetails.jsx'
 import { CartProvider } from "../context/CartContext.jsx";
+import OrderSuccess from "./OrderSuccess.jsx";
 // import Dashboard from './Dashboard.jsx'
 // import AdminDashboard from './AdminDashboard.jsx'
 
@@ -28,6 +29,7 @@ function App() {
           <Route path="/my-profile" element={<MyProfile />} />
           <Route path="/account" element={<Account />} />
           <Route path="/book/:id" element={<BookDetails />} />
+          <Route path="/order-success" element={<OrderSuccess />} />
           {/* <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/dashboard/:userId" element={<Dashboard />} />

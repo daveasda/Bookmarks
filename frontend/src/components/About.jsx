@@ -1,133 +1,147 @@
+
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar.jsx";
 import Footer from "./Footer.jsx";
 
-function About() {
+export default function About() {
   return (
+    <div className="bm-editorial bm-about">
+      <Navbar />
 
-    <main className="about-page">
-    
-        <Navbar />
-
-      {/* Introduction */}
-      <section className="about-hero">
-        <p className="about-eyebrow">
-          WELCOME TO BOOKMARKS
-        </p>
-
-        <h1>A Story Behind Every Page</h1>
-
-        <p className="about-hero-text">
-          Where stories begin, and imagination never ends.
-          Discover a world of books, ideas, and inspiration.
-        </p>
-      </section>
-
-      {/* Our Story */}
-      <section className="about-story">
-        <div className="about-story-image">
+      <main>
+        {/* TOP BANNER */}
+        <section className="about-hero">
           <img
-            src="/reading.svg"
-            alt="A welcoming bookstore filled with books"
+            src="/trunk.webp"
+            alt="Uplifting stories and wonderful books"
           />
-        </div>
+        </section>
 
-        <div className="about-story-content">
-          <p className="about-eyebrow">
-            WHO WE ARE
-          </p>
+        {/* OUR STORY */}
+        <section className="about-story">
+          <div className="about-story-art">
+            <img
+              src="/reading.svg"
+              alt="A reader enjoying a book"
+              loading="lazy"
+            />
+          </div>
 
-          <h2>Our Story</h2>
+          <div className="about-story-text">
+            <span className="about-eyebrow">
+              WHO WE ARE
+            </span>
 
-          <div className="about-small-divider"></div>
+            <h1>Our Story</h1>
+
+            <div className="about-accent-line" />
+
+            <p>
+              At BookMarks, we believe every great story
+              deserves to be discovered. Our bookstore
+              is a place for curious minds, lifelong
+              readers, and anyone searching for their
+              next favourite book.
+            </p>
+
+            <p>
+              From unforgettable fiction to books that
+              help you learn and grow, we want to make
+              finding your next read simple, enjoyable,
+              and inspiring.
+            </p>
+
+            <p className="about-story-quote">
+              "Because every great story begins
+              with a single page."
+            </p>
+          </div>
+        </section>
+
+        {/* FULL WIDTH READING BANNER */}
+        {/* <section className="about-wide-banner">
+          <img
+            src="/about-2.jpg"
+            alt="Books are a window to the world"
+            loading="lazy"
+          />
+        </section> */}
+
+        {/* OUR VALUES */}
+        <section className="about-values">
+          <div className="about-values-intro">
+            <span className="about-eyebrow">
+              WHAT WE BELIEVE
+            </span>
+
+            <h2>More Than Just Books</h2>
+
+            <p>
+              Reading is about more than turning pages.
+              It's about exploring ideas, connecting
+              with others, and discovering new perspectives.
+            </p>
+          </div>
+
+          <div className="about-values-grid">
+            <article className="about-value-card">
+              <span className="about-value-number">01</span>
+              <h3>Discover</h3>
+              <p>
+                Find stories, ideas, and authors that
+                spark your curiosity.
+              </p>
+            </article>
+
+            <article className="about-value-card">
+              <span className="about-value-number">02</span>
+              <h3>Connect</h3>
+              <p>
+                Share the joy of reading and feel
+                part of a community of book lovers.
+              </p>
+            </article>
+
+            <article className="about-value-card">
+              <span className="about-value-number">03</span>
+              <h3>Inspire</h3>
+              <p>
+                Let every new book open the door
+                to a different way of seeing the world.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        {/* ADVENTURE FEATURE */}
+        <section className="about-adventure">
+          <img
+            src="/banner.webp"
+            alt="A fantasy landscape with a dragon and castle"
+            loading="lazy"
+          />
+        </section>
+
+        {/* FINAL CALL TO ACTION */}
+        <section className="about-final">
+          <span className="about-eyebrow">
+            YOUR NEXT ADVENTURE AWAITS
+          </span>
+
+          <h2>Your Next Chapter Starts Here.</h2>
 
           <p>
-            Lorem ipsum dolor sit amet, consectetur
-            adipiscing elit. Sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud
-            exercitation ullamco laboris nisi ut aliquip
-            ex ea commodo consequat.
+            Every great story begins with a single page.
+            Find the book that speaks to you.
           </p>
 
-          <p>
-            Duis aute irure dolor in reprehenderit in
-            voluptate velit esse cillum dolore eu fugiat
-            nulla pariatur. Excepteur sint occaecat
-            cupidatat non proident, sunt in culpa qui
-            officia deserunt mollit anim id est laborum.
-          </p>
-        </div>
-      </section>
-
-      {/* Our Philosophy */}
-      <section className="about-philosophy">
-        <p className="about-eyebrow">
-          WHAT WE BELIEVE
-        </p>
-
-        <h2>More Than Just Books</h2>
-
-        <p>
-          Lorem ipsum dolor sit amet, consectetur
-          adipiscing elit. Vivamus luctus urna sed
-          urna ultricies ac tempor dui sagittis.
-          In condimentum facilisis porta.
-        </p>
-
-        <div className="about-features">
-
-          <div className="about-feature">
-            <span className="about-feature-number">01</span>
-            <h3>Discover</h3>
-            <p>
-              Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit.
-              Integer posuere erat a ante.
-            </p>
-          </div>
-
-          <div className="about-feature">
-            <span className="about-feature-number">02</span>
-            <h3>Connect</h3>
-            <p>
-              Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit.
-              Integer posuere erat a ante.
-            </p>
-          </div>
-
-          <div className="about-feature">
-            <span className="about-feature-number">03</span>
-            <h3>Inspire</h3>
-            <p>
-              Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit.
-              Integer posuere erat a ante.
-            </p>
-          </div>
-
-        </div>
-      </section>
-
-      {/* Call to Action */}
-      <section className="about-cta">
-        <h2>Your Next Chapter Starts Here.</h2>
-
-        <p>
-          Every great story begins with a single page.
-          Find the book that speaks to you.
-        </p>
-
-        <Link to="/books" className="about-shop-btn">
-          Explore Our Books
-        </Link>
-      </section>
+          <Link to="/books" className="about-shop-button">
+            Explore Our Books
+          </Link>
+        </section>
+      </main>
 
       <Footer />
-
-    </main>
+    </div>
   );
 }
-
-export default About;
