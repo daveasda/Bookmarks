@@ -3764,3 +3764,39 @@ html {
     font-size: 36px;
   }
 }
+
+
+.profile-welcome-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.profile-logout-btn {
+  padding: 12px 24px;
+  background: transparent;
+  color: #6b3fa0;
+  border: 1px solid #6b3fa0;
+  border-radius: 6px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.profile-logout-btn:hover:not(:disabled) {
+  background: #6b3fa0;
+  color: white;
+}
+
+.profile-logout-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+  .profile-welcome-actions {
+    width: 100%;
+  }
+}

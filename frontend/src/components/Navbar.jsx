@@ -2,12 +2,15 @@
 import React, { useState } from "react";
 import { Link, useNavigate, NavLink } from "react-router-dom";
 import { Search, ShoppingCart, UserRound, Menu, X } from "lucide-react";
+import { useAuth } from "../context/AuthContext.jsx";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
 
   const navigate = useNavigate();
+  const { user, loading } = useAuth();
+
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
@@ -65,10 +68,18 @@ const Navbar = () => {
             <ShoppingCart size={27} />
           </Link>
 
-          <Link to="/account" className="profile-link">
+          
+          <Link
+            to={user ? "/my-profile" : "/account"}
+            className="profile-link"
+            onClick={(event) => {
+              if (loading) event.preventDefault();
+            }}
+          >
             <UserRound size={29} />
-            <span>Sign In</span>
+            <span>{user ? "My Profile" : "Sign In"}</span>
           </Link>
+
         </div>
 
         

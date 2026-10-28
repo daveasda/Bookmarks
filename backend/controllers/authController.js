@@ -113,3 +113,17 @@ export const login = async (req, res) => {
 
     }
 };
+
+
+export const logout = (req, res) => {
+  res.clearCookie("auth_token", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    path: "/",
+  });
+
+  return res.json({
+    message: "Logged out successfully.",
+  });
+};

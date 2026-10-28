@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import { useAuth } from "../context/AuthContext.jsx";
+
 
 // Temporary order data — unchanged.
 const sampleOrders = [
@@ -39,6 +41,10 @@ const API_URL = "http://localhost:5000";
 
 function MyProfile() {
   const navigate = useNavigate();
+  
+  const { setUser } = useAuth();
+  const [loggingOut, setLoggingOut] = useState(false);
+
 
   const [account, setAccount] = useState(null);
   const [form, setForm] = useState({
@@ -154,6 +160,32 @@ function MyProfile() {
     setError("");
   };
 
+  
+  const handleLogout = async () => {
+    if (loggingOut) return;
+
+    setLoggingOut(true);
+    setError("");
+
+    try {
+      const response = await fetch(`${API_URL}/api/auth/logout`, {
+        method: "POST",
+        credentials: "include",
+      });
+
+      if (!response.ok) {
+        throw new Error("Unable to log out. Please try again.");
+      }
+
+      setUser(null);
+      navigate("/", { replace: true });
+    } catch (error) {
+      console.error("Logout error:", error);
+      setError(error.message);
+      setLoggingOut(false);
+    }
+  };
+
   const formatPrice = (price) =>
     `Rs. ${price.toLocaleString("en-LK", {
       minimumFractionDigits: 2,
@@ -210,9 +242,22 @@ function MyProfile() {
               </p>
             </div>
 
-            <Link to="/books" className="profile-shop-btn">
-              Continue Shopping
-            </Link>
+            
+            <div className="profile-welcome-actions">
+              <Link to="/books" className="profile-shop-btn">
+                Continue Shopping
+              </Link>
+
+              <button
+                type="button"
+                className="profile-logout-btn"
+                onClick={handleLogout}
+                disabled={loggingOut}
+              >
+                {loggingOut ? "Logging Out..." : "Logout"}
+              </button>
+            </div>
+
           </section>
 
           {/* ACCOUNT OVERVIEW */}

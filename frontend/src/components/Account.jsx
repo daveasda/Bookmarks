@@ -1,10 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useAuth } from "../context/AuthContext.jsx";
 import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 
 function Account() {
   const navigate = useNavigate();
+  
+  const { user, setUser, loading } = useAuth();
+
+  useEffect(() => {
+    if (!loading && user) {
+      navigate(
+        user.role === "admin" ? "/admin-dashboard" : "/my-profile",
+        { replace: true }
+      );
+    }
+  }, [user, loading, navigate]);
+
 
   const [login, setLogin] = useState({
     email: "",
@@ -58,6 +71,7 @@ function Account() {
         alert(data.message);
         return;
       }
+      setUser(data.account);
 
       // Redirect according to account role
       if (data.account.role === "admin") {
@@ -87,14 +101,26 @@ function Account() {
       );
       const data = await response.json();
       
-      if (!response.ok) { alert(data.message); return;}
-      navigate("/my-profile", {replace: true});
+      
+      if (!response.ok) {
+        alert(data.message);
+        return;
+      }
+
+      setUser(data.account);
+      navigate("/my-profile", { replace: true });
+
     }
     catch (error) {
       console.error("Registration error:", error);
     }
+
   };
 
+
+  if (loading || user) {
+    return null;
+  }
 
   return (
     <>
