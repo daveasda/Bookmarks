@@ -4936,3 +4936,331 @@ html {
   font-weight: 700;
   letter-spacing: 2.5px;
 }
+
+
+/* Author search results */
+
+.bm-author-results {
+  width: min(94%, 1400px);
+  margin: 35px auto;
+}
+
+.bm-author-results h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 28px;
+  margin-bottom: 22px;
+}
+
+.bm-author-results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.bm-author-result-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px;
+  background: #fff9f2;
+  border: 1px solid #eee4ef;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #2d2032;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.bm-author-result-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(82, 45, 96, 0.12);
+}
+
+.bm-author-result-card img {
+  width: 70px;
+  height: 85px;
+  object-fit: cover;
+  border-radius: 5px;
+  flex-shrink: 0;
+}
+
+.bm-author-result-card h3 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 18px;
+  margin: 0 0 8px;
+}
+
+.bm-author-result-card span {
+  color: #80426e;
+  font-size: 13px;
+}
+
+@media (max-width: 600px) {
+  .bm-author-results-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bm-author-results h2 {
+    font-size: 23px;
+  }
+}
+
+
+/* ===================================
+   AUTHOR SEARCH RESULTS
+=================================== */
+
+.bm-author-results {
+  width: min(94%, 1400px);
+  margin: 35px auto;
+}
+
+.bm-author-results h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 28px;
+  margin-bottom: 22px;
+  color: var(--text-primary, #2d2032);
+}
+
+.bm-author-results-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(240px, 1fr)
+  );
+  gap: 20px;
+}
+
+.bm-author-result-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px;
+  background: var(--panel, #fff9f2);
+  border: 1px solid var(--border-light, #eee4ef);
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--text-primary, #2d2032);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.bm-author-result-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(82, 45, 96, 0.12);
+}
+
+.bm-author-result-card img {
+  width: 70px;
+  height: 85px;
+  object-fit: cover;
+  border-radius: 5px;
+  flex-shrink: 0;
+}
+
+.bm-author-result-card h3 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 18px;
+  margin: 0 0 8px;
+  color: var(--text-primary, #2d2032);
+}
+
+.bm-author-result-card span {
+  color: var(--secondary, #80426e);
+  font-size: 13px;
+}
+
+@media (max-width: 600px) {
+  .bm-author-results-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bm-author-results h2 {
+    font-size: 23px;
+  }
+
+  .bm-author-result-card {
+    padding: 14px;
+  }
+}
+
+
+/* Customer rating login prompt */
+
+.book-rating-login {
+  margin-top: 24px;
+}
+
+.book-rating-login p {
+  margin-bottom: 18px;
+}
+
+.book-rating-login-link {
+  display: inline-block;
+  padding: 12px 22px;
+  background: var(--primary, #522d60);
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+  font-family: Georgia, "Times New Roman", serif;
+  transition: background 0.2s ease;
+}
+
+.book-rating-login-link:hover {
+  background: var(--primary-hover, #80426e);
+  color: white;
+}
+
+.book-rating-error {
+  margin-top: 12px;
+  color: #b42318;
+}
+
+.book-rating-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+
+/* Book rating stars */
+
+.book-user-stars {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 18px 0 22px;
+}
+
+.book-user-stars button {
+  appearance: none;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0 2px;
+  color: #b7a6c1;
+  font-size: 42px;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.book-user-stars button.selected,
+.book-user-stars button:hover {
+  color: #e6a04d;
+}
+
+.book-user-stars button:hover {
+  transform: scale(1.15);
+}
+
+.book-user-stars button:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.book-user-stars button:disabled {
+  cursor: wait;
+}
+
+.book-user-stars button:disabled:hover {
+  transform: none;
+}
+
+
+/* Guest rating invitation */
+
+.book-rating-guest-card {
+  margin-top: 24px;
+  padding: 28px;
+  background: #faf7fb;
+  border: 1px solid #eadfed;
+  border-radius: 12px;
+  max-width: 520px;
+}
+
+.book-rating-guest-heading {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.book-rating-guest-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background: #f1e7f3;
+  color: #e6a04d;
+  font-size: 29px;
+}
+
+.book-rating-guest-heading h3 {
+  margin: 0 0 5px;
+  color: var(--primary, #522d60);
+  font-size: 21px;
+  font-weight: 600;
+}
+
+.book-rating-guest-heading p {
+  margin: 0;
+  color: #65546b;
+  font-size: 14px;
+}
+
+.book-rating-guest-stars {
+  margin: 22px 0 12px;
+  color: #b7a6c1;
+  font-size: 37px;
+  letter-spacing: 5px;
+  line-height: 1.2;
+}
+
+.book-rating-guest-description {
+  margin: 0 0 22px;
+  color: #65546b;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.book-rating-guest-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 13px 24px;
+  background: var(--primary, #522d60);
+  color: #ffffff;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.book-rating-guest-button:hover {
+  background: var(--primary-hover, #80426e);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 600px) {
+  .book-rating-guest-card {
+    padding: 20px;
+  }
+
+  .book-rating-guest-heading h3 {
+    font-size: 18px;
+  }
+
+  .book-rating-guest-stars {
+    font-size: 32px;
+    letter-spacing: 3px;
+  }
+
+  .book-rating-guest-button {
+    width: 100%;
+  }
+}

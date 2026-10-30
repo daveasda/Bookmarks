@@ -12,10 +12,59 @@ export default function Shop() {
   const [searchParams] = useSearchParams();
   const [category, setCategory] = useState("All");
   const [sort, setSort] = useState("featured");
+  const [authors, setAuthors] = useState([]);
+  const [authorsLoading, setAuthorsLoading] = useState(false);
+  const [authorsError, setAuthorsError] = useState("");
 
   // Navbar sends searches to /books?search=your-keyword.
   const rawSearch = (searchParams.get("search") || "").trim();
   const searchTerm = rawSearch.toLowerCase();
+  useEffect(() => {
+    // Clear previous author results
+    setAuthors([]);
+    setAuthorsError("");
+
+    if (!searchTerm) {
+      setAuthorsLoading(false);
+      return;
+    }
+
+    const controller = new AbortController();
+
+    const fetchAuthors = async () => {
+      setAuthorsLoading(true);
+
+      try {
+        const response = await fetch(
+          `http://localhost:5000/api/authors/search?q=${encodeURIComponent(searchTerm)}`,
+          { signal: controller.signal }
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to search authors");
+        }
+
+        const data = await response.json();
+        setAuthors(data.authors || []);
+
+      } catch (error) {
+        if (error.name !== "AbortError") {
+          console.error("Author search error:", error);
+          setAuthorsError("Unable to load matching authors.");
+        }
+      } finally {
+        if (!controller.signal.aborted) {
+          setAuthorsLoading(false);
+        }
+      }
+    };
+
+    fetchAuthors();
+
+    return () => controller.abort();
+  }, [searchTerm]);
+
+
 
   const filtered = books.filter((book) => {
     const matchesCategory =
@@ -50,6 +99,48 @@ export default function Shop() {
           </h1>
           <p>Explore our collection and find something worth turning the page for.</p>
         </header>
+
+                
+        {searchTerm && (
+          <section className="bm-author-results">
+            <h2>Matching Authors</h2>
+
+            {authorsLoading && <p>Searching authors...</p>}
+
+            {authorsError && (
+              <p role="alert">{authorsError}</p>
+            )}
+
+            {!authorsLoading && !authorsError && authors.length > 0 && (
+              <div className="bm-author-results-grid">
+                {authors.map((author) => (
+                  <Link
+                    key={author.author_id}
+                    to={`/authors/${author.author_id}`}
+                    className="bm-author-result-card"
+                  >
+                    <img
+                      src={author.image_url || "/images/no-author.jpg"}
+                      alt={author.name}
+                      onError={(e) => {
+                        e.currentTarget.style.display = "none";
+                      }}
+                    />
+
+                    <div>
+                      <h3>{author.name}</h3>
+                      <span>View author profile →</span>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            )}
+
+            {!authorsLoading && !authorsError && authors.length === 0 && (
+              <p>No matching author profiles found.</p>
+            )}
+          </section>
+        )}
 
         <section className="bm-shop-catalog" aria-label="Browse books">
           <div className="bm-shop-toolbar">
