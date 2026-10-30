@@ -11,7 +11,7 @@ import BookDetails from './BookDetails.jsx'
 import { CartProvider } from "../context/CartContext.jsx";
 import OrderSuccess from "./OrderSuccess.jsx";
 import { AuthProvider } from "../context/AuthContext.jsx";
-
+import { BookProvider } from "../context/BookContext.jsx";
 // import Dashboard from './Dashboard.jsx'
 // import AdminDashboard from './AdminDashboard.jsx'
 
@@ -22,24 +22,26 @@ function App() {
   return (
     <Router>
       <AuthProvider>
-        <CartProvider>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/books" element={<Shop />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/checkout" element={<Checkout />} />
-            <Route path="/my-profile" element={<MyProfile />} />
-            <Route path="/account" element={<Account />} />
-            <Route path="/book/:id" element={<BookDetails />} />
-            <Route path="/order-success" element={<OrderSuccess />} />
-            {/* <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/dashboard/:userId" element={<Dashboard />} />
-            <Route path="/admin-dashboard" element={<AdminDashboard />} /> */}
+        <BookProvider>
+          <CartProvider>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/books" element={<Shop />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/my-profile" element={<MyProfile />} />
+              <Route path="/account" element={<Account />} />
+              <Route path="/book/:id" element={<BookDetails />} />
+              <Route path="/order-success" element={<OrderSuccess />} />
+              {/* <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/dashboard/:userId" element={<Dashboard />} />
+              <Route path="/admin-dashboard" element={<AdminDashboard />} /> */}
 
-          </Routes>
-        </CartProvider>
+            </Routes>
+          </CartProvider>
+        </BookProvider>
       </AuthProvider>
     </Router>
      

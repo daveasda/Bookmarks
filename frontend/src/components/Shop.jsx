@@ -2,10 +2,11 @@ import { useState } from "react";
 import Navbar from "./Navbar.jsx";
 import BookSection from "./BookSection.jsx";
 import Footer from "./Footer.jsx";
-import { books } from "../data/books.js";
+import { useBooks } from "../context/BookContext.jsx";
 
 const filters = ["All", "Fiction", "Fantasy", "Dystopian", "Self Help"];
 export default function Shop() {
+  const { books, loading, error } = useBooks();
   const [category, setCategory] = useState("All");
   const [sort, setSort] = useState("featured");
   const filtered = books.filter((book) => category === "All" || book.genre?.toLowerCase() === category.toLowerCase());

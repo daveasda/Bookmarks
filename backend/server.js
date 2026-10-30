@@ -6,6 +6,7 @@ import pool from "./config/db.js";
 import authRoutes from "./routes/authRoutes.js";
 import accountRoutes from "./routes/accountRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
+import bookRoutes from "./routes/bookRoutes.js";
 
 dotenv.config();
 
@@ -29,6 +30,8 @@ app.use(cookieParser());
 app.use("/api/auth", authRoutes);
 app.use("/api/account", accountRoutes);
 app.use("/api/orders", orderRoutes);
+app.use("/api/books", bookRoutes);
+
 
 // Test route
 app.get("/", (req, res) => {

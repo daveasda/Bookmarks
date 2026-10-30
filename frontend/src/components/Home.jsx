@@ -1,11 +1,12 @@
-
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar.jsx";
 import BookSection from "./BookSection.jsx";
 import Footer from "./Footer.jsx";
-import { books } from "../data/books.js";
+import { useBooks } from "../context/BookContext.jsx";
 
 export default function Home() {
+  const { books, loading, error } = useBooks();
+
   return (
     <div className="bm-editorial bm-home">
       <Navbar />
@@ -67,7 +68,7 @@ export default function Home() {
 
           <BookSection
             title="Popular on our shelves"
-            books={books.slice(0, 5)}
+            books={books.slice(20, 25)}
           />
         </section>
 
@@ -99,7 +100,7 @@ export default function Home() {
 
           <BookSection
             title="Explore our bookshelf"
-            books={books.slice(5, 10)}
+            books={books.slice(15, 20)}
           />
         </section>
 

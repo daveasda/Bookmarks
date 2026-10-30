@@ -386,110 +386,201 @@ select {
   align-items: stretch;
 }
 
-.book-card {
+
+/* BOOK CARD */
+
+.bm-editorial .book-card {
   display: flex;
   flex-direction: column;
-  align-items: center;
   min-width: 0;
-  background: transparent;
+  height: 100%;
+  padding: 14px;
+  background: #fff;
+  border: 1px solid #eee9ed;
+  border-radius: 5px;
   text-decoration: none;
-  color: var(--text-light);
-  padding: 0;
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
+  color: var(--text-primary);
+  box-shadow: 0 3px 14px rgba(30, 20, 40, 0.045);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.book-card:hover {
-  transform: none;
-  box-shadow: none;
+.bm-editorial .book-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(30, 20, 40, 0.10);
 }
 
-.book-card-cover {
+.bm-editorial .book-card-cover {
   position: relative;
-  width: 100%;
   display: flex;
+  align-items: center;
   justify-content: center;
+  height: 240px;
+  background: #faf9f7;
+  overflow: hidden;
 }
 
-.book-card-image {
+.bm-editorial .book-card-image {
   display: block;
-  width: 100%;
-  max-width: 200px;
-  height: 290px;
+  width: auto;
+  max-width: 100%;
+  height: 210px;
   object-fit: contain;
-  object-position: center;
-  background: transparent;
-  border-radius: 0;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.12);
 }
 
-.book-badge {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  background-color: var(--primary);
-  color: var(--text-light);
-  padding: 8px 12px;
-  font-family: var(--font-body);
-  font-size: var(--font-size-2xs);
-  font-weight: var(--font-weight-semibold);
-  z-index: 1;
-}
-
-.book-card-content {
+.bm-editorial .book-card-content {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  max-width: 200px;
-  padding: 14px 0 0;
-  text-align: left;
   flex: 1;
+  padding: 16px 2px 3px;
+  font-family: Georgia, "Times New Roman", serif;
 }
 
-.book-category {
-  font-family: var(--font-body);
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-regular);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--accent);
+.bm-editorial .book-category {
   margin-bottom: 8px;
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--primary);
 }
 
-.book-card h3 {
-  font-family: var(--font-heading);
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-bold);
-  line-height: 1.4;
-  color: var(--text-light);
-  margin: 0 0 6px;
+.bm-editorial .book-card-title {
+  margin: 0 0 7px;
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.35;
+  color: var(--text-primary);
 }
 
-.book-author {
-  font-family: var(--font-body);
-  font-size: var(--font-size-compact);
-  font-weight: var(--font-weight-regular);
-  line-height: 1.4;
-  color: #D8E5F0;
-  margin: 0 0 10px;
+.bm-editorial .book-author {
+  margin: 0 0 12px;
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text-secondary);
 }
 
-.book-price {
-  font-family: var(--font-body);
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-bold);
-  color: var(--text-light);
-  margin: 0;
-  padding: 0;
+.bm-editorial .book-price {
+  margin: auto 0 0;
+  padding-top: 8px;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
 }
 
-.book-card:hover h3 {
-  text-decoration: underline;
+.bm-editorial .book-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  padding: 6px 8px;
+  background: var(--primary);
+  color: white;
+  font-size: 9px;
+  letter-spacing: 0.5px;
 }
 
-.book-card:hover .book-card-image {
-  opacity: 0.9;
+/* SHOP PAGE */
+
+.bm-shop .bm-shop-intro {
+  padding: 55px 24px 40px;
+  text-align: center;
 }
+
+.bm-shop .bm-shop-intro h1 {
+  margin: 10px 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(30px, 3vw, 44px);
+  font-weight: 400;
+}
+
+.bm-shop .bm-shop-intro p {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.bm-shop .bm-shop-catalog {
+  width: min(100% - 64px, 1600px);
+  margin: 0 auto 80px;
+}
+
+.bm-shop .bm-shop-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.bm-shop .bm-filter-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.bm-shop .bm-filter {
+  padding: 9px 16px;
+  border: 1px solid var(--border-light);
+  border-radius: 3px;
+  background: white;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.bm-shop .bm-filter.active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.bm-shop .bm-results {
+  margin: 18px 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+  .bm-shop .bm-shop-catalog {
+    width: calc(100% - 32px);
+  }
+
+  .bm-shop .bm-shop-intro {
+    padding: 35px 16px 28px;
+  }
+
+  .bm-editorial .book-card {
+    padding: 10px;
+  }
+
+  .bm-editorial .book-card-cover {
+    height: 190px;
+  }
+
+  .bm-editorial .book-card-image {
+    height: 165px;
+  }
+
+  .bm-editorial .book-card-title {
+    font-size: 15px;
+  }
+
+  .bm-editorial .book-author {
+    font-size: 12px;
+  }
+
+  .bm-editorial .book-price {
+    font-size: 14px;
+  }
+}
+
 
 .footer {
   display: flex;
@@ -3798,5 +3889,319 @@ html {
 @media (max-width: 600px) {
   .profile-welcome-actions {
     width: 100%;
+  }
+}
+
+
+/* ================================================================
+   SHOP PAGE REFINEMENTS
+   Scoped to .bm-shop so other components retain their existing styles.
+   ================================================================ */
+
+.bm-shop .bm-shop-intro {
+  padding: 54px 24px 38px;
+  text-align: center;
+}
+
+.bm-shop .bm-shop-intro h1,
+.bm-shop .book-section-title {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  letter-spacing: -0.025em;
+}
+
+.bm-shop .bm-shop-intro h1 {
+  font-size: clamp(34px, 3.4vw, 48px);
+  line-height: 1.18;
+}
+
+.bm-shop .bm-shop-catalog {
+  width: calc(100% - 8%);
+  max-width: 1600px;
+  margin-inline: auto;
+  padding-bottom: 80px;
+}
+
+.bm-shop .book-section {
+  padding: 8px 0 30px;
+  background: transparent;
+}
+
+.bm-shop .book-section-heading {
+  margin-bottom: 24px;
+}
+
+.bm-shop .book-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 26px 20px;
+  align-items: stretch;
+}
+
+.bm-shop .book-card {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+  padding: 13px;
+  background: #fff;
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+  box-shadow: 0 5px 18px rgba(7, 35, 58, 0.07);
+  color: var(--text-primary);
+  text-decoration: none;
+  overflow: hidden;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.bm-shop .book-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(7, 35, 58, 0.13);
+}
+
+.bm-shop .book-card-cover {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 255px;
+  padding: 12px;
+  background: #f4f6f8;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.bm-shop .book-card-image {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: 220px;
+  object-fit: contain;
+  border-radius: 5px;
+  box-shadow: 0 5px 14px rgba(7, 35, 58, 0.13);
+}
+
+.bm-shop .book-card-content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  max-width: none;
+  padding: 16px 2px 4px;
+  text-align: left;
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.bm-shop .book-category {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.bm-shop .book-card h3,
+.bm-shop .book-card-title {
+  margin: 8px 0 7px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -.01em;
+  color: var(--text-primary);
+}
+
+.bm-shop .book-author {
+  margin: 0 0 12px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.bm-shop .book-price {
+  margin: auto 0 0;
+  padding-top: 8px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.bm-shop .book-badge {
+  border-radius: 5px;
+}
+
+@media (max-width: 1100px) {
+  .bm-shop .book-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 650px) {
+  .bm-shop .bm-shop-catalog {
+    width: calc(100% - 32px);
+  }
+
+  .bm-shop .book-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px 12px;
+  }
+
+  .bm-shop .book-card {
+    padding: 9px;
+    border-radius: 11px;
+  }
+
+  .bm-shop .book-card-cover {
+    height: 195px;
+    padding: 8px;
+  }
+
+  .bm-shop .book-card-image {
+    height: 172px;
+  }
+
+  .bm-shop .book-card-content {
+    padding-top: 12px;
+  }
+
+  .bm-shop .book-card h3,
+  .bm-shop .book-card-title {
+    font-size: 16px;
+  }
+
+  .bm-shop .book-author {
+    font-size: 12px;
+  }
+
+  .bm-shop .book-price {
+    font-size: 15px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bm-shop .book-card {
+    transition: none;
+  }
+}
+
+
+/* ================================================================
+   HOME PAGE — CONSISTENT FEATURED-BOOK TYPOGRAPHY
+   Applies only to book cards inside the Home page.
+   ================================================================ */
+
+.bm-home .book-card-content,
+.bm-home .book-card-content .book-category,
+.bm-home .book-card-content .book-author,
+.bm-home .book-card-content .book-price,
+.bm-home .book-card-content h3,
+.bm-home .book-card-content .book-card-title {
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: normal;
+  text-transform: none;
+}
+
+.bm-home .book-card-content {
+  text-align: left;
+}
+
+.bm-home .book-card-content .book-category {
+  margin-bottom: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.bm-home .book-card-content h3,
+.bm-home .book-card-content .book-card-title,
+.bm-home .home-shelf .book-card-content h3 {
+  margin: 0 0 7px;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.38;
+  letter-spacing: 0;
+  color: var(--text-primary);
+}
+
+.bm-home .book-card-content .book-author {
+  margin: 0 0 12px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0;
+  color: var(--text-secondary);
+}
+
+.bm-home .book-card-content .book-price {
+  margin-top: auto;
+  padding-top: 8px;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0;
+  color: var(--text-primary);
+}
+
+@media (max-width: 650px) {
+  .bm-home .book-card-content h3,
+  .bm-home .book-card-content .book-card-title,
+  .bm-home .home-shelf .book-card-content h3 {
+    font-size: 16px;
+  }
+
+  .bm-home .book-card-content .book-author {
+    font-size: 13px;
+  }
+
+  .bm-home .book-card-content .book-price {
+    font-size: 15px;
+  }
+}
+
+/* ================================================================
+   HOME — DISPLAY COMPLETE BOOK COVERS WITHOUT CROPPING
+   Overrides earlier fixed image heights only within Home book cards.
+   ================================================================ */
+.bm-home .book-card-cover,
+.bm-home .home-shelf .book-card-cover {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 310px;
+  min-height: 0;
+  padding: 12px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.bm-home .book-card-cover .book-card-image,
+.bm-home .home-shelf .book-card-cover .book-card-image,
+.bm-home .home-featured-books .book-card-cover img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: center;
+  flex-shrink: 1;
+}
+
+@media (max-width: 650px) {
+  .bm-home .book-card-cover,
+  .bm-home .home-shelf .book-card-cover {
+    height: 215px;
+    padding: 8px;
   }
 }

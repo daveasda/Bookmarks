@@ -3,11 +3,11 @@ import { useParams } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { useCart } from "../context/CartContext.jsx";
-import { books } from "../data/books.js";
-
+import { useBooks } from "../context/BookContext.jsx";
 
 function BookDetails() {
   const { id } = useParams();
+  const { books, loading, error } = useBooks();
   const {addToCart} = useCart();
 
   const book = books.find(
@@ -19,6 +19,15 @@ function BookDetails() {
   const [hoverRating, setHoverRating] = useState(0);
   const [ratingSubmitted, setRatingSubmitted] = useState(false);
   const [cartMessage, setCartMessage] = useState("");
+
+  
+  if (loading) {
+    return <p>Loading book details...</p>;
+  }
+
+  if (error) {
+    return <p>Unable to load book details: {error}</p>;
+  }
 
   if (!book) {
     return (
