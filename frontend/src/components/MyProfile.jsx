@@ -4,39 +4,6 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { useAuth } from "../context/AuthContext.jsx";
 
-
-// Temporary order data — unchanged.
-const sampleOrders = [
-  {
-    id: "BM-1001",
-    date: "15 Oct 2026",
-    items: "The Mad Ship",
-    total: 4140,
-    status: "Delivered",
-  },
-  {
-    id: "BM-1002",
-    date: "18 Oct 2026",
-    items: "Atomic Habits",
-    total: 3250,
-    status: "Processing",
-  },
-  {
-    id: "BM-1003",
-    date: "20 Oct 2026",
-    items: "The Silent Patient, The Alchemist",
-    total: 5850,
-    status: "Shipped",
-  },
-  {
-    id: "BM-1004",
-    date: "21 Oct 2026",
-    items: "The Psychology of Money",
-    total: 2890,
-    status: "Pending",
-  },
-];
-
 const API_URL = "http://localhost:5000";
 
 function MyProfile() {
@@ -44,6 +11,10 @@ function MyProfile() {
   
   const { setUser } = useAuth();
   const [loggingOut, setLoggingOut] = useState(false);
+  const [orders, setOrders] = useState([]);
+  const [ordersLoading, setOrdersLoading] = useState(true);
+  const [ordersError, setOrdersError] = useState("");
+
 
 
   const [account, setAccount] = useState(null);
@@ -101,6 +72,43 @@ function MyProfile() {
 
     return () => controller.abort();
   }, [navigate]);
+
+    
+  useEffect(() => {
+    const controller = new AbortController();
+
+    const loadOrders = async () => {
+      try {
+        const response = await fetch(`${API_URL}/api/orders/my`, {
+          credentials: "include",
+          signal: controller.signal,
+        });
+
+        if (!response.ok) {
+          throw new Error("Unable to load your orders.");
+        }
+
+        const data = await response.json();
+
+        if (!controller.signal.aborted) {
+          setOrders(data.orders);
+        }
+      } catch (error) {
+        if (error.name !== "AbortError") {
+          setOrdersError(error.message);
+        }
+      } finally {
+        if (!controller.signal.aborted) {
+          setOrdersLoading(false);
+        }
+      }
+    };
+
+    loadOrders();
+
+    return () => controller.abort();
+  }, []);
+
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -177,8 +185,8 @@ function MyProfile() {
         throw new Error("Unable to log out. Please try again.");
       }
 
-      setUser(null);
-      navigate("/", { replace: true });
+      setUser(null); //This clears the user from React Context.
+      navigate("/", { replace: true }); //This sends the visitor to the homepage.
     } catch (error) {
       console.error("Logout error:", error);
       setError(error.message);
@@ -190,19 +198,20 @@ function MyProfile() {
     `Rs. ${price.toLocaleString("en-LK", {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
-    })}`;
+  })}`;
 
-  const totalOrders = sampleOrders.length;
+ 
+  const totalOrders = orders.length;
 
-  const deliveredOrders = sampleOrders.filter(
-    (order) => order.status === "Delivered"
+  const deliveredOrders = orders.filter(
+    (order) => order.status?.toLowerCase() === "delivered"
   ).length;
 
-  const activeOrders = sampleOrders.filter(
+  const activeOrders = orders.filter(
     (order) =>
-      order.status === "Pending" ||
-      order.status === "Processing" ||
-      order.status === "Shipped"
+      ["placed", "pending", "processing", "shipped"].includes(
+        order.status?.toLowerCase()
+      )
   ).length;
 
   if (loading) {
@@ -428,29 +437,50 @@ function MyProfile() {
                     <th>Status</th>
                   </tr>
                 </thead>
-
                 <tbody>
-                  {sampleOrders.map((order) => (
-                    <tr key={order.id}>
-                      <td className="profile-order-id">
-                        {order.id}
-                      </td>
-
-                      <td>{order.date}</td>
-
-                      <td>{order.items}</td>
-
-                      <td>{formatPrice(order.total)}</td>
-
-                      <td>
-                        <span
-                          className={`profile-status profile-status-${order.status.toLowerCase()}`}
-                        >
-                          {order.status}
-                        </span>
+                  {ordersLoading ? (
+                    <tr>
+                      <td colSpan="5">Loading your orders...</td>
+                    </tr>
+                  ) : ordersError ? (
+                    <tr>
+                      <td colSpan="5" role="alert">{ordersError}</td>
+                    </tr>
+                  ) : orders.length === 0 ? (
+                    <tr>
+                      <td colSpan="5">
+                        You haven't placed any orders yet.
                       </td>
                     </tr>
-                  ))}
+                  ) : (
+                    orders.map((order) => (
+                      <tr key={order.order_id}>
+                        <td className="profile-order-id">
+                          BM-{order.order_id}
+                        </td>
+
+                        <td>
+                          {new Date(order.placed_at).toLocaleDateString("en-GB", {
+                            day: "numeric",
+                            month: "short",
+                            year: "numeric",
+                          })}
+                        </td>
+
+                        <td>{order.books}</td>
+
+                        <td>{formatPrice(Number(order.total))}</td>
+
+                        <td>
+                          <span
+                            className={`profile-status profile-status-${order.status.toLowerCase()}`}
+                          >
+                            {order.status}
+                          </span>
+                        </td>
+                      </tr>
+                    ))
+                  )}
                 </tbody>
               </table>
             </div>

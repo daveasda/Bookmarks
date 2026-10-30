@@ -116,7 +116,7 @@ export const login = async (req, res) => {
 
 
 export const logout = (req, res) => {
-  res.clearCookie("auth_token", {
+  res.clearCookie("auth_token", { // tells the browser to delete the authentication cookie.
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",

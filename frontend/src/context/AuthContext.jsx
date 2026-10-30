@@ -7,7 +7,7 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const refreshUser = async () => {
+  const refreshUser = async () => { //Reloads the account from the backend
     try {
       const response = await fetch(
         "http://localhost:5000/api/account/me",
@@ -32,7 +32,7 @@ export function AuthProvider({ children }) {
   };
 
   useEffect(() => {
-    refreshUser();
+    refreshUser(); // This tells React to run `refreshUser()` when the provider first mounts.
   }, []);
 
   return (

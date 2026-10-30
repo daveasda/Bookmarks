@@ -1,8 +1,9 @@
-
 import { bookCatalog } from "../data/bookCatalog.js";
-import { createGuestOrder } from "../models/orderModel.js";
+import { createOrder, findOrdersByAccountId, } from "../models/orderModel.js";
+import { findAccountById } from "../models/accountModel.js";
 
-export const placeGuestOrder = async (req, res) => {
+
+export const placeOrder = async (req, res) => {
   try {
     const { customer, items, deliveryMethod } = req.body ?? {};
 
@@ -118,8 +119,25 @@ export const placeGuestOrder = async (req, res) => {
       country.trim(),
     ].filter(Boolean).join(", ");
 
+
+    // Verify the account before associating the order.
+    let accountId = null;
+
+    if (req.accountId != null) {
+      const account = await findAccountById(req.accountId);
+
+      if (!account) {
+        return res.status(401).json({
+          message: "Account unavailable. Please log in again.",
+        });
+      }
+
+      accountId = account.account_id;
+    }
+
     // Save order and items in one transaction.
-    const savedOrder = await createGuestOrder({
+    const savedOrder = await createOrder({
+      accountId,
       email: cleanEmail,
       recipientName,
       phone: phone.trim(),
@@ -148,6 +166,29 @@ export const placeGuestOrder = async (req, res) => {
 
     return res.status(500).json({
       message: "Unable to place order. Please try again.",
+    });
+  }
+};
+
+
+export const getMyOrders = async (req, res) => {
+  try {
+    const account = await findAccountById(req.accountId);
+
+    if (!account) {
+      return res.status(401).json({
+        message: "Account not found or inactive.",
+      });
+    }
+
+    const orders = await findOrdersByAccountId(account.account_id);
+
+    return res.status(200).json({ orders });
+  } catch (error) {
+    console.error("Load orders error:", error);
+
+    return res.status(500).json({
+      message: "Unable to load your orders.",
     });
   }
 };

@@ -57,7 +57,7 @@ function Checkout() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (placingOrder) return;
+    if (placingOrder) return; //prevents the handler from starting another request while one is already being processed.
 
     setOrderError("");
 
@@ -100,6 +100,7 @@ function Checkout() {
           headers: {
             "Content-Type": "application/json",
           },
+          credentials: "include",
           body: JSON.stringify(orderData),
         }
       );

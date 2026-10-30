@@ -1,6 +1,6 @@
 import pool from "../config/db.js";
 
-export const createGuestOrder = async (order) => {
+export const createOrder = async (order) => {
     const client = await pool.connect();
 
     try{
@@ -9,9 +9,19 @@ export const createGuestOrder = async (order) => {
         const orderResult = await client.query(
             `INSERT INTO customer_order 
                 (account_id, guest_email, recipient_name, delivery_phone, delivery_address, delivery_method, subtotal, delivery_fee, total, payment_method, status)
-                VALUES (NULL, $1,$2, $3, $4, $5, $6, $7, $8, 'cod', 'placed')
+                VALUES ($1,$2, $3, $4, $5, $6, $7, $8, $9, 'cod', 'placed')
                 RETURNING order_id, placed_at`,
-                [order.email, order.recipientName, order.phone, order.address, order.deliveryMethod, order.subtotal, order.deliveryFee, order.total]
+                [
+                    order.accountId,
+                    order.email,
+                    order.recipientName,
+                    order.phone,
+                    order.address,
+                    order.deliveryMethod,
+                    order.subtotal,
+                    order.deliveryFee,
+                    order.total,
+                    ]
         );
 
         const savedOrder = orderResult.rows[0];
@@ -36,4 +46,37 @@ export const createGuestOrder = async (order) => {
         } finally {
             client.release();
         }
-}
+};
+
+
+export const findOrdersByAccountId = async (accountId) => {
+  const result = await pool.query(
+    `
+    SELECT
+      co.order_id,
+      co.placed_at,
+      co.total,
+      co.status,
+      COALESCE(
+        STRING_AGG(
+          oi.book_title || ' × ' || oi.quantity,
+          ', ' ORDER BY oi.order_item_id
+        ),
+        ''
+      ) AS books
+    FROM customer_order co
+    LEFT JOIN order_item oi
+      ON oi.order_id = co.order_id
+    WHERE co.account_id = $1
+    GROUP BY
+      co.order_id,
+      co.placed_at,
+      co.total,
+      co.status
+    ORDER BY co.placed_at DESC, co.order_id DESC
+    `,
+    [accountId]
+  );
+
+  return result.rows;
+};

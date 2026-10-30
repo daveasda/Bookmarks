@@ -9,14 +9,14 @@ function Account() {
   
   const { user, setUser, loading } = useAuth();
 
-  useEffect(() => {
+  useEffect(() => { //This handles someone manually opening `/account` while already logged in.
     if (!loading && user) {
       navigate(
         user.role === "admin" ? "/admin-dashboard" : "/my-profile",
         { replace: true }
       );
     }
-  }, [user, loading, navigate]);
+  }, [user, loading, navigate]); //means the effect is reconsidered when one of these values changes.
 
 
   const [login, setLogin] = useState({
@@ -118,7 +118,7 @@ function Account() {
   };
 
 
-  if (loading || user) {
+  if (loading || user) { //This prevents the login and registration forms from appearing while authentication is loading or while an authenticated user is being redirected.
     return null;
   }
 
