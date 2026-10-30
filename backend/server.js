@@ -7,6 +7,7 @@ import authRoutes from "./routes/authRoutes.js";
 import accountRoutes from "./routes/accountRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
 import bookRoutes from "./routes/bookRoutes.js";
+import authorRoutes from "./routes/authorRoutes.js";
 
 dotenv.config();
 
@@ -31,6 +32,8 @@ app.use("/api/auth", authRoutes);
 app.use("/api/account", accountRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/books", bookRoutes);
+app.use("/api/authors", authorRoutes);
+
 
 
 // Test route

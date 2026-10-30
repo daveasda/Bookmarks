@@ -5,6 +5,7 @@ export const getAllBooks = async () => {
     SELECT
       b.book_id AS id,
       b.title,
+      a.author_id AS author_id,
       a.name AS author,
       b.isbn,
       b.cover_url AS image,

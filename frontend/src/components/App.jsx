@@ -12,6 +12,7 @@ import { CartProvider } from "../context/CartContext.jsx";
 import OrderSuccess from "./OrderSuccess.jsx";
 import { AuthProvider } from "../context/AuthContext.jsx";
 import { BookProvider } from "../context/BookContext.jsx";
+import AuthorDetails from "./AuthorDetails.jsx";
 // import Dashboard from './Dashboard.jsx'
 // import AdminDashboard from './AdminDashboard.jsx'
 
@@ -34,6 +35,7 @@ function App() {
               <Route path="/account" element={<Account />} />
               <Route path="/book/:id" element={<BookDetails />} />
               <Route path="/order-success" element={<OrderSuccess />} />
+              <Route path="/authors/:id" element={<AuthorDetails />} />
               {/* <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/dashboard/:userId" element={<Dashboard />} />

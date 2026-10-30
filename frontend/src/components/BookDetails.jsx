@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { useCart } from "../context/CartContext.jsx";
@@ -103,7 +103,13 @@ function BookDetails() {
               <h1>{book.title}</h1>
 
               <p className="book-details-author">
-                by {book.author}
+                by{" "}
+                <Link
+                  to={`/authors/${book.author_id}`}
+                  className="book-author-link"
+                >
+                  {book.author}
+                </Link>
               </p>
 
               <p className="book-details-price">
@@ -169,7 +175,11 @@ function BookDetails() {
                 <div className="book-details-specs">
                   <div>
                     <span>Author</span>
-                    <strong>{book.author}</strong>
+                    <strong>
+                      <Link to={`/authors/${book.author_id}`}>
+                        {book.author}
+                      </Link>
+                    </strong>
                   </div>
 
                   <div>
