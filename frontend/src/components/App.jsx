@@ -25,6 +25,7 @@ import AdminOrderDetails from "./AdminOrderDetails.jsx";
 import AdminRestockBooks from "./AdminRestockBooks.jsx";
 import ForgotPassword from "./ForgotPassword.jsx";
 import ResetPassword from "./ResetPassword.jsx";
+import VerifyEmail from "./VerifyEmail";
 
 
 function App() {
@@ -58,6 +59,7 @@ function App() {
               <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path="/reset-password" element={<ResetPassword />} />
               <Route path="/admin/authors" element={<AdminAuthors />} />
+              <Route path="/verify-email" element={<VerifyEmail />} />
             </Routes>
           </CartProvider>
         </BookProvider>

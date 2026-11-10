@@ -116,6 +116,11 @@ function MyProfile() {
   const handleChange = (event) => {
     const { name, value } = event.target;
 
+    // Phone number: allow digits only
+    if (name === "phone" && !/^[0-9]*$/.test(value)) {
+      return;
+    }
+
     setForm((previous) => ({
       ...previous,
       [name]: value,
@@ -152,7 +157,7 @@ function MyProfile() {
       });
 
       setEditing(false);
-      setMessage("Profile updated successfully!");
+      setMessage(data.message || "Profile updated successfully!");
     } catch (err) {
       setError(err.message);
     } finally {
@@ -373,7 +378,9 @@ function MyProfile() {
                     name="phone"
                     value={form.phone}
                     onChange={handleChange}
-                    placeholder="Not provided"
+                    placeholder="Enter phone number"
+                    inputMode="numeric"
+                    pattern="[0-9]*"
                     maxLength={20}
                   />
 

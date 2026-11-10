@@ -1,3 +1,4 @@
+
 import nodemailer from "nodemailer";
 
 const transporter = nodemailer.createTransport({
@@ -11,21 +12,25 @@ const transporter = nodemailer.createTransport({
 function escapeHtml(value) {
   return String(value ?? "").replace(
     /[&<>"']/g,
-    (character) => ({
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#39;",
-    })[character]
+    (character) =>
+      ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;",
+      })[character]
   );
 }
 
 function money(value) {
-  return `Rs. ${Number(value || 0).toLocaleString("en-LK", {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  })}`;
+  return `Rs. ${Number(value || 0).toLocaleString(
+    "en-LK",
+    {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }
+  )}`;
 }
 
 function emailLayout(content) {
@@ -35,7 +40,7 @@ function emailLayout(content) {
       <div style="max-width:620px;margin:auto;background:white;
                   border:1px solid #e2e8f0;border-radius:12px;
                   overflow:hidden;">
-        <div style="background:#14213d;color:white;
+        <div style="background:#522D60;color:white;
                     padding:24px;text-align:center;">
           <h1 style="margin:0;font-size:26px;">BOOKMARKS</h1>
         </div>
@@ -47,39 +52,59 @@ function emailLayout(content) {
         <div style="background:#f8fafc;padding:18px;
                     text-align:center;color:#64748b;
                     font-size:12px;">
-          BookMarks | Automated order notification
+          BookMarks | Automated notification
         </div>
       </div>
     </div>
   `;
 }
 
+function sender() {
+  return {
+    name: process.env.MAIL_FROM_NAME || "BookMarks",
+    address: process.env.GMAIL_USER,
+  };
+}
+
+// ------------------------------------------
+// ORDER CONFIRMATION
+// ------------------------------------------
+
 export async function sendOrderConfirmation(order) {
   const items = order.items || [];
 
-  const rows = items.map((item) => `
-    <tr>
-      <td style="padding:12px;border-bottom:1px solid #eee;">
-        ${escapeHtml(item.book_title)}
-      </td>
-      <td style="padding:12px;text-align:center;
-                 border-bottom:1px solid #eee;">
-        ${escapeHtml(item.quantity)}
-      </td>
-      <td style="padding:12px;text-align:right;
-                 border-bottom:1px solid #eee;">
-        ${money(Number(item.unit_price) * Number(item.quantity))}
-      </td>
-    </tr>
-  `).join("");
+  const rows = items
+    .map(
+      (item) => `
+        <tr>
+          <td style="padding:12px;border-bottom:1px solid #eee;">
+            ${escapeHtml(item.book_title)}
+          </td>
+          <td style="padding:12px;text-align:center;
+                     border-bottom:1px solid #eee;">
+            ${escapeHtml(item.quantity)}
+          </td>
+          <td style="padding:12px;text-align:right;
+                     border-bottom:1px solid #eee;">
+            ${money(
+              Number(item.unit_price) *
+                Number(item.quantity)
+            )}
+          </td>
+        </tr>
+      `
+    )
+    .join("");
 
   const html = emailLayout(`
     <h2>Thank you for your order!</h2>
 
     <p>Hello ${escapeHtml(order.recipient_name)},</p>
 
-    <p>We've received your order and will notify you
-       as it progresses.</p>
+    <p>
+      We've received your order and will notify you
+      as it progresses.
+    </p>
 
     <h3>Order #${escapeHtml(order.order_id)}</h3>
 
@@ -109,15 +134,16 @@ export async function sendOrderConfirmation(order) {
   `);
 
   return transporter.sendMail({
-    from: {
-      name: process.env.MAIL_FROM_NAME || "BookMarks",
-      address: process.env.GMAIL_USER,
-    },
+    from: sender(),
     to: order.email,
     subject: `BookMarks - Order #${order.order_id} Received`,
     html,
   });
 }
+
+// ------------------------------------------
+// ORDER STATUS EMAIL
+// ------------------------------------------
 
 const statusMessages = {
   confirmed: "Your order has been confirmed.",
@@ -128,11 +154,12 @@ const statusMessages = {
 
 export async function sendOrderStatusEmail(order) {
   const status = String(order.status || "").toLowerCase();
-
   const message = statusMessages[status];
 
   if (!message) {
-    throw new Error(`Unsupported email status: ${status}`);
+    throw new Error(
+      `Unsupported email status: ${status}`
+    );
   }
 
   const html = emailLayout(`
@@ -144,15 +171,18 @@ export async function sendOrderStatusEmail(order) {
 
     <div style="background:#f1f5f9;padding:20px;
                 border-radius:8px;margin:24px 0;">
-      <p><strong>Order:</strong>
+      <p>
+        <strong>Order:</strong>
         #${escapeHtml(order.order_id)}
       </p>
 
-      <p><strong>New status:</strong>
+      <p>
+        <strong>New status:</strong>
         ${escapeHtml(status.toUpperCase())}
       </p>
 
-      <p><strong>Order total:</strong>
+      <p>
+        <strong>Order total:</strong>
         ${money(order.total)}
       </p>
     </div>
@@ -161,39 +191,152 @@ export async function sendOrderStatusEmail(order) {
   `);
 
   return transporter.sendMail({
-    from: {
-      name: process.env.MAIL_FROM_NAME || "BookMarks",
-      address: process.env.GMAIL_USER,
-    },
+    from: sender(),
     to: order.email,
     subject: `BookMarks - Order #${order.order_id} ${status}`,
     html,
   });
 }
 
+// ------------------------------------------
+// VERIFY EMAIL CONNECTION
+// ------------------------------------------
+
 export async function verifyEmailConnection() {
   return transporter.verify();
 }
 
-export async function sendPasswordResetEmail({ email, fullName, resetUrl }) {
+// ------------------------------------------
+// FORGOT PASSWORD EMAIL
+// ------------------------------------------
+
+export async function sendPasswordResetEmail({
+  email,
+  fullName,
+  resetUrl,
+}) {
   const html = emailLayout(`
     <h2>Reset your password</h2>
+
     <p>Hello ${escapeHtml(fullName)},</p>
-    <p>We received a request to reset your BookMarks password.</p>
-    <p><a href="${escapeHtml(resetUrl)}" style="display:inline-block;background:#522D60;color:#fff;padding:12px 20px;border-radius:6px;text-decoration:none">Reset password</a></p>
-    <p>This link expires in 15 minutes and can be used only once.</p>
-    <p>If you did not request this, you can ignore this email.</p>
+
+    <p>
+      We received a request to reset your
+      BookMarks password.
+    </p>
+
+    <p>
+      <a
+        href="${escapeHtml(resetUrl)}"
+        style="display:inline-block;background:#522D60;
+               color:#ffffff;padding:12px 20px;
+               border-radius:6px;text-decoration:none;"
+      >
+        Reset Password
+      </a>
+    </p>
+
+    <p>
+      This link expires in 15 minutes and
+      can be used only once.
+    </p>
+
+    <p>
+      If you did not request this,
+      you can ignore this email.
+    </p>
   `);
+
   return transporter.sendMail({
-    from: { name: process.env.MAIL_FROM_NAME || 'BookMarks', address: process.env.GMAIL_USER },
-    to: email, subject: 'BookMarks - Reset your password', html,
+    from: sender(),
+    to: email,
+    subject: "BookMarks - Reset your password",
+    html,
   });
 }
 
-export async function sendPasswordChangedEmail({ email, fullName }) {
+// ------------------------------------------
+// PASSWORD CHANGED EMAIL
+// ------------------------------------------
+
+export async function sendPasswordChangedEmail({
+  email,
+  fullName,
+}) {
+  const html = emailLayout(`
+    <h2>Password Changed</h2>
+
+    <p>Hello ${escapeHtml(fullName)},</p>
+
+    <p>
+      Your BookMarks password was
+      successfully changed.
+    </p>
+
+    <p>
+      If this was not you, please contact
+      support immediately.
+    </p>
+  `);
+
   return transporter.sendMail({
-    from: { name: process.env.MAIL_FROM_NAME || 'BookMarks', address: process.env.GMAIL_USER },
-    to: email, subject: 'BookMarks - Your password was changed',
-    html: emailLayout(`<h2>Password changed</h2><p>Hello ${escapeHtml(fullName)},</p><p>Your BookMarks password was successfully changed. If this was not you, contact support immediately.</p>`),
+    from: sender(),
+    to: email,
+    subject: "BookMarks - Your password was changed",
+    html,
+  });
+}
+
+// ------------------------------------------
+// EMAIL VERIFICATION
+// ------------------------------------------
+
+export async function sendEmailVerificationEmail({
+  email,
+  fullName,
+  verifyUrl,
+}) {
+  const html = emailLayout(`
+    <h2>Verify your email address</h2>
+
+    <p>Hello ${escapeHtml(fullName)},</p>
+
+    <p>
+      Thank you for registering with BookMarks!
+      Please verify your email address to activate
+      your account or confirm your new email.
+    </p>
+
+    <p>
+      <a
+        href="${escapeHtml(verifyUrl)}"
+        style="display:inline-block;
+               background:#522D60;
+               color:#ffffff;
+               padding:12px 24px;
+               border-radius:6px;
+               text-decoration:none;
+               font-weight:bold;"
+      >
+        Verify Email Address
+      </a>
+    </p>
+
+    <p>
+      This verification link expires in
+      24 hours and can only be used once.
+    </p>
+
+    <p>
+      If you did not request this,
+      you can safely ignore this email.
+    </p>
+  `);
+
+  return transporter.sendMail({
+    from: sender(),
+    to: email,
+    subject: "BookMarks - Verify Your Email Address",
+    html,
   });
 }
