@@ -42,6 +42,98 @@ function BookDetails() {
   const [ratingError, setRatingError] = useState("");
   const [ratingMessage, setRatingMessage] = useState("");
 
+  // Reading shelf state (customer accounts only)
+  const [readingShelf, setReadingShelf] = useState("");
+  const [readingShelfLoading, setReadingShelfLoading] = useState(false);
+  const [readingShelfSaving, setReadingShelfSaving] = useState(false);
+  const [readingShelfMessage, setReadingShelfMessage] = useState("");
+  const [readingShelfError, setReadingShelfError] = useState("");
+
+  useEffect(() => {
+    const controller = new AbortController();
+    setReadingShelf("");
+    setReadingShelfMessage("");
+    setReadingShelfError("");
+
+    if (authLoading || user?.role !== "customer") {
+      setReadingShelfLoading(false);
+      return () => controller.abort();
+    }
+
+    async function loadReadingShelf() {
+      setReadingShelfLoading(true);
+      try {
+        const response = await fetch(`${API_URL}/api/reading/shelves`, {
+          credentials: "include",
+          signal: controller.signal,
+        });
+        const data = await response.json();
+        if (!response.ok) {
+          throw new Error(data.message || "Unable to load your reading shelf.");
+        }
+        const entry = (data.books || []).find(
+          (item) => String(item.book_id) === String(id)
+        );
+        if (!controller.signal.aborted) setReadingShelf(entry?.shelf || "");
+      } catch (err) {
+        if (!controller.signal.aborted) setReadingShelfError(err.message);
+      } finally {
+        if (!controller.signal.aborted) setReadingShelfLoading(false);
+      }
+    }
+
+    loadReadingShelf();
+    return () => controller.abort();
+  }, [id, user?.account_id, user?.role, authLoading]);
+
+  async function updateReadingShelf(nextShelf) {
+    if (!nextShelf || readingShelfSaving) return;
+    setReadingShelfSaving(true);
+    setReadingShelfMessage("");
+    setReadingShelfError("");
+    try {
+      const response = await fetch(`${API_URL}/api/reading/shelves/${id}`, {
+        method: "PUT",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ shelf: nextShelf }),
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.message || "Unable to save your reading shelf.");
+      }
+      setReadingShelf(nextShelf);
+      setReadingShelfMessage("Your reading shelf has been updated!");
+    } catch (err) {
+      setReadingShelfError(err.message);
+    } finally {
+      setReadingShelfSaving(false);
+    }
+  }
+
+  async function removeFromReadingShelf() {
+    if (readingShelfSaving) return;
+    setReadingShelfSaving(true);
+    setReadingShelfMessage("");
+    setReadingShelfError("");
+    try {
+      const response = await fetch(`${API_URL}/api/reading/shelves/${id}`, {
+        method: "DELETE",
+        credentials: "include",
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.message || "Unable to remove this book.");
+      }
+      setReadingShelf("");
+      setReadingShelfMessage("Book removed from your reading tracker.");
+    } catch (err) {
+      setReadingShelfError(err.message);
+    } finally {
+      setReadingShelfSaving(false);
+    }
+  }
+
   // Load public rating summary
   useEffect(() => {
     const controller = new AbortController();
@@ -327,6 +419,68 @@ function BookDetails() {
                 <p className="book-cart-success" role="status">
                   {cartMessage}
                 </p>
+              )}
+
+              {/* MY READING SHELF */}
+              {!authLoading && (
+                <section className="book-reading-shelf" aria-label="My Reading Shelf">
+                  <h2>My Reading Shelf</h2>
+                  <p>Keep this book in your personal reading tracker.</p>
+
+                  {!user ? (
+                    <Link
+                      to="/account"
+                      state={{ from: `/book/${id}` }}
+                      className="book-reading-shelf-link"
+                    >
+                      Sign in to add to your shelf
+                    </Link>
+                  ) : user.role === "customer" ? (
+                    <>
+                      <label htmlFor="book-reading-shelf-select">Reading status</label>
+                      <div className="book-reading-shelf-controls">
+                        <select
+                          id="book-reading-shelf-select"
+                          value={readingShelf}
+                          disabled={readingShelfLoading || readingShelfSaving}
+                          onChange={(event) => updateReadingShelf(event.target.value)}
+                        >
+                          <option value="">Not on my shelf</option>
+                          <option value="want_to_read">TBR — Want to Read</option>
+                          <option value="currently_reading">Current Reads</option>
+                          <option value="read">Read</option>
+                        </select>
+                        {readingShelf && (
+                          <button
+                            type="button"
+                            onClick={removeFromReadingShelf}
+                            disabled={readingShelfSaving || readingShelfLoading}
+                          >
+                            Remove from Shelf
+                          </button>
+                        )}
+                      </div>
+                      {readingShelfLoading && <p>Loading your shelf...</p>}
+                      {readingShelfSaving && <p>Saving your shelf...</p>}
+                      {readingShelfMessage && (
+                        <p className="book-reading-shelf-success" role="status">
+                          {readingShelfMessage}
+                        </p>
+                      )}
+                      {readingShelfError && (
+                        <p className="book-reading-shelf-error" role="alert">
+                          {readingShelfError}
+                        </p>
+                      )}
+                      <Link to="/reading-tracker" className="book-reading-shelf-link">
+                        View My Reading Tracker
+                      </Link>
+                    </>
+                  ) : (
+                    <p>Reading shelves are available for customer accounts.</p>
+                  )}
+                </section>
+
               )}
 
               {/* PRODUCT DETAILS */}

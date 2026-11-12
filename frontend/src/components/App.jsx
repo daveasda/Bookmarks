@@ -26,6 +26,8 @@ import AdminRestockBooks from "./AdminRestockBooks.jsx";
 import ForgotPassword from "./ForgotPassword.jsx";
 import ResetPassword from "./ResetPassword.jsx";
 import VerifyEmail from "./VerifyEmail";
+import ReadingTracker from "./ReadingTracker";
+import ReadingWrapped from "./ReadingWrapped";
 
 
 function App() {
@@ -60,6 +62,8 @@ function App() {
               <Route path="/reset-password" element={<ResetPassword />} />
               <Route path="/admin/authors" element={<AdminAuthors />} />
               <Route path="/verify-email" element={<VerifyEmail />} />
+              <Route path="/reading-tracker" element={<ReadingTracker />} />
+              <Route path="/reading-wrapped" element={<ReadingWrapped />} />
             </Routes>
           </CartProvider>
         </BookProvider>

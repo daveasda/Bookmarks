@@ -14,7 +14,7 @@ import adminBookRoutes from "./routes/adminBookRoutes.js";
 import adminCustomerRoutes from "./routes/adminCustomerRoutes.js";
 import adminOrderRoutes from "./routes/adminOrderRoutes.js";
 import adminAuthorRoutes from "./routes/adminAuthorRoutes.js";
-
+import readingTrackerRoutes from "./routes/readingTrackerRoutes.js";
 
 
 dotenv.config();
@@ -49,7 +49,7 @@ app.use("/api/admin/books", adminBookRoutes);
 app.use("/api/admin/customers", adminCustomerRoutes);
 app.use("/api/admin/orders", adminOrderRoutes);
 app.use("/api/admin/authors", adminAuthorRoutes);
-
+app.use("/api/reading", readingTrackerRoutes);
 
 // Test route
 app.get("/", (req, res) => {

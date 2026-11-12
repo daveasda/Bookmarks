@@ -427,6 +427,29 @@ function MyProfile() {
             </div>
           </section>
 
+          {/* READING FEATURES */}
+          <section className="profile-reading-section">
+            <div className="profile-reading-heading">
+              <p className="profile-eyebrow">YOUR READING JOURNEY</p>
+              <h2>My Reading</h2>
+              <p>Keep your books organized and revisit your year in stories.</p>
+            </div>
+            <div className="profile-reading-grid">
+              <Link to="/reading-tracker" className="profile-reading-card">
+                <span className="profile-reading-icon" aria-hidden="true">📚</span>
+                <h3>My Reading Tracker</h3>
+                <p>Manage your TBR, current reads, finished books, and yearly reading goal.</p>
+                <span className="profile-reading-action">Open Reading Tracker →</span>
+              </Link>
+              <Link to="/reading-wrapped" className="profile-reading-card">
+                <span className="profile-reading-icon" aria-hidden="true">✨</span>
+                <h3>My Wrapped</h3>
+                <p>Explore your reading statistics, favorite authors, and top genres.</p>
+                <span className="profile-reading-action">View My Wrapped →</span>
+              </Link>
+            </div>
+          </section>
+
           {/* HARDCODED ORDER HISTORY — UNCHANGED */}
           <section className="profile-orders">
             <div className="profile-orders-heading">
