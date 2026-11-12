@@ -6,6 +6,27 @@ import { useAuth } from "../context/AuthContext.jsx";
 import { API_URL } from "../config/api";
 
 
+function AnimatedOrderCount({ value }) {
+  const [display, setDisplay] = useState(0);
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setDisplay(value);
+      return;
+    }
+    let frame;
+    const start = performance.now();
+    const duration = 750;
+    const animate = (now) => {
+      const progress = Math.min((now - start) / duration, 1);
+      setDisplay(Math.round(value * (1 - Math.pow(1 - progress, 3))));
+      if (progress < 1) frame = requestAnimationFrame(animate);
+    };
+    frame = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(frame);
+  }, [value]);
+  return <strong>{display}</strong>;
+}
+
 function MyProfile() {
   const navigate = useNavigate();
   
@@ -412,17 +433,17 @@ function MyProfile() {
             <div className="profile-stats">
               <div className="profile-stat-card">
                 <span>Total Orders</span>
-                <strong>{totalOrders}</strong>
+                <AnimatedOrderCount value={totalOrders} />
               </div>
 
               <div className="profile-stat-card">
                 <span>Active Orders</span>
-                <strong>{activeOrders}</strong>
+                <AnimatedOrderCount value={activeOrders} />
               </div>
 
               <div className="profile-stat-card">
                 <span>Delivered</span>
-                <strong>{deliveredOrders}</strong>
+                <AnimatedOrderCount value={deliveredOrders} />
               </div>
             </div>
           </section>

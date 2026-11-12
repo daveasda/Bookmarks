@@ -210,8 +210,11 @@ export default function Home() {
           {/* RIGHT: BOOK COLLECTION */}
           <div className="home-featured-books">
 
+            <h2 className="home-featured-title">
+              Featured Books
+            </h2>
+
             <BookSection
-              title="Featured Books"
               books={books.slice(0, 4)}
             />
 

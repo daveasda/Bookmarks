@@ -217,12 +217,22 @@ function Account() {
 
       <main className="account-page">
         <div className="account-container">
-          <h1 className="account-title">Account</h1>
+          <div className="account-intro">
+            <div className="account-intro-copy">
+              <span className="account-eyebrow">YOUR BOOKMARKS ACCOUNT</span>
+              <h1 className="account-title">Welcome to BookMarks</h1>
+              <p className="account-lead">Sign in to continue your reading journey, or create an account to get started.</p>
+            </div>
+          </div>
 
           <div className="account-layout">
             {/* LOGIN FORM */}
             <section className="account-box">
-              <h2>Login</h2>
+              <div className="account-card-heading">
+                <span className="account-card-kicker">WELCOME BACK</span>
+                <h2>Login</h2>
+                <p>Access your account and saved reading lists.</p>
+              </div>
 
               <form
                 className="account-form"
@@ -289,7 +299,11 @@ function Account() {
 
             {/* REGISTER FORM */}
             <section className="account-box">
-              <h2>Register</h2>
+              <div className="account-card-heading">
+                <span className="account-card-kicker">NEW HERE?</span>
+                <h2>Register</h2>
+                <p>Create your account and discover your next read.</p>
+              </div>
 
               <form
                 className="account-form"

@@ -20,14 +20,14 @@ export default function ForgotPassword() {
     } catch { setMessage('Unable to connect to the server.'); }
     finally { setBusy(false); }
   }
-  return <><Navbar /><main className="account-page"><div className="account-container">
-    <h1 className="account-title">Forgot Password</h1>
-    <section className="account-box" style={{ maxWidth: 480, margin: 'auto' }}>
-      <p>Enter your email address to receive a password reset link.</p>
+  return <><Navbar /><main className="account-page auth-flow-page"><div className="account-container auth-flow-container">
+    <div className="auth-flow-header"><span className="auth-flow-eyebrow">ACCOUNT RECOVERY</span><h1 className="account-title">Forgot Password</h1><p>We’ll help you get back to your books.</p></div>
+    <section className="account-box auth-flow-card">
+      <p className="auth-flow-description">Enter your email address and we’ll send you a link to reset your password.</p>
       <form className="account-form" onSubmit={submit}>
         <div className="account-field"><label htmlFor="reset-email">Email address</label>
           <input id="reset-email" type="email" autoComplete="email" required value={email} onChange={e => setEmail(e.target.value)} /></div>
         <button className="account-submit-btn" disabled={busy}>{busy ? 'Sending…' : 'Send reset link'}</button>
-      </form><p role="status">{message}</p><Link to="/account">Back to login</Link>
+      </form>{message && <p role="status" className="auth-flow-message">{message}</p>}<Link className="auth-flow-back" to="/account">← Back to Login</Link>
     </section></div></main><Footer /></>;
 }

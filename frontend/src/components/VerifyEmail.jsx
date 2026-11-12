@@ -75,19 +75,13 @@ function VerifyEmail() {
     <>
       <Navbar />
 
-      <main className="account-page">
-        <div className="account-container">
+      <main className="account-page auth-flow-page">
+        <div className="account-container auth-flow-container">
           <div
-            className="account-box"
-            style={{
-              maxWidth: "520px",
-              margin: "40px auto",
-              textAlign: "center",
-            }}
+            className="account-box auth-flow-card auth-flow-verify"
           >
-            <h1 className="account-title">
-              Email Verification
-            </h1>
+            <span className="auth-flow-eyebrow">ACCOUNT VERIFICATION</span>
+            <h1 className="account-title">Email Verification</h1>
 
             {status === "loading" && (
               <p role="status">{message}</p>
@@ -110,11 +104,7 @@ function VerifyEmail() {
                 <Link
                   to="/account"
                   className="account-submit-btn"
-                  style={{
-                    display: "inline-block",
-                    textDecoration: "none",
-                    marginTop: "20px",
-                  }}
+                  style={{ textDecoration: "none", marginTop: "20px" }}
                 >
                   Go to Login
                 </Link>
@@ -135,9 +125,7 @@ function VerifyEmail() {
                   or already been used.
                 </p>
 
-                <Link to="/account">
-                  Return to Account
-                </Link>
+                <Link className="auth-flow-back" to="/account">← Return to Account</Link>
               </>
             )}
           </div>

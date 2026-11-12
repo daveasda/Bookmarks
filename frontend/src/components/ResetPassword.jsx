@@ -75,18 +75,16 @@ export default function ResetPassword() {
     <>
       <Navbar />
 
-      <main className="account-page">
-        <div className="account-container">
-          <h1 className="account-title">
-            Reset Password
-          </h1>
+      <main className="account-page auth-flow-page">
+        <div className="account-container auth-flow-container">
+          <div className="auth-flow-header">
+            <span className="auth-flow-eyebrow">ACCOUNT SECURITY</span>
+            <h1 className="account-title">Reset Password</h1>
+            <p>Choose a new password for your BookMarks account.</p>
+          </div>
 
           <section
-            className="account-box"
-            style={{
-              maxWidth: 480,
-              margin: "auto",
-            }}
+            className="account-box auth-flow-card"
           >
             {!token ? (
               <p role="alert">
@@ -158,9 +156,7 @@ export default function ResetPassword() {
               </p>
             )}
 
-            <Link to="/account">
-              Back to Login
-            </Link>
+            <Link className="auth-flow-back" to="/account">← Back to Login</Link>
           </section>
         </div>
       </main>
